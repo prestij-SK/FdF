@@ -1,4 +1,5 @@
 #include "../header/file_control.h"
+#include "../header/landscape_init.h"
 
 void	delete_file_data(t_FileData *file_data)
 {
@@ -109,7 +110,7 @@ static int	parse_content(t_FileData *file_data)
 		return (0);
 	while (line)
 	{
-		if (!check_line_spacing(line))
+		if (!check_line_symbols(line))
 		{
 			get_next_line(ERROR_CODE);
 			free(line);
