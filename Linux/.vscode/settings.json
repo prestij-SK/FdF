@@ -1,0 +1,11 @@
+{
+	"files.associations": {
+		"stdlib.h": "c",
+		"fdf.h": "c",
+		"file_control.h": "c",
+		"array": "c",
+		"string_view": "c",
+		"initializer_list": "c",
+		"utility": "c"
+	}
+}
