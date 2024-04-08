@@ -8,7 +8,8 @@ SRCS_DIR = src/
 OBJS_DIR = obj/
 HEADERS_DIR = header/
 
-SRCS_NAME = error_handling.c \
+SRCS_NAME = draw_landscape.c \
+			error_handling.c \
 			fdf_start.c \
 			file_control.c \
 			get_next_line_utils.c \

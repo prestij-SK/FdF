@@ -17,7 +17,7 @@ typedef struct FileData
 /*
 	file_control.c functions
 
-	* delete_file_data - deletes all feilds of 'file_data'
+	* delete_file_data - deletes all feilds of 'file_data'.
 	* file_data_init - initializing all 'file_data' fields, returns true on success, else false.
 */
 void	delete_file_data(t_FileData *file_data);
