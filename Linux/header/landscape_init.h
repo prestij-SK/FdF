@@ -22,24 +22,13 @@ typedef struct LandescapeCoordinates
 } 	t_LandscapeData;
 
 /*
-	utils.c functions
-
-	* split_size - returns the size of split (str**).
-	* remove_last_enter - returns new string, but without last character if it was '\n'.
-*/
-size_t	split_size(char **split);
-char	*remove_last_enter(char *line);
-
-/*
 	error_handling.c functions
 
-	* void	render_error - exit with message of issue while trying to render the landscape.
 	* usage_arguments - exit and explaining how to use program arguments properly.
 	* usage_file_values - exit and explaining what values file must have.
 	* usage_file_content - exit and explaining what must file content have.
 	* exit_with_error - exit with code 1 and also shows given str text.
 */
-void	render_error();
 void	usage_arguments();
 void	usage_file_values();
 void	usage_file_content();

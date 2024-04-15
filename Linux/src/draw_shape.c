@@ -1,6 +1,6 @@
 #include "../header/fdf.h"
 
-void draw_rectangle(t_Image *img)
+void draw_rectangle_filled(t_Image *img)
 {
     int	i;
     int	j;

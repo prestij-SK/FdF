@@ -1,5 +1,6 @@
 #include "../header/file_control.h"
 #include "../header/landscape_init.h"
+#include "../header/fdf.h"
 
 void	delete_file_data(t_FileData *file_data)
 {

@@ -8,17 +8,20 @@ SRCS_DIR = src/
 OBJS_DIR = obj/
 HEADERS_DIR = header/
 
-SRCS_NAME = draw_functions.c \
+SRCS_NAME = buttons.c \
+			draw_shape.c \
 			error_handling.c \
 			fdf_draw.c \
 			fdf_start.c \
 			file_control.c \
 			get_next_line_utils.c \
 			get_next_line.c \
-			libft_funcs.c \
-			input_handler.c \
+			input.c \
 			landscape_init.c \
+			libft_funcs.c \
 			main.c \
+			render.c \
+			update.c \
 			utils.c \
 			validation.c \
 

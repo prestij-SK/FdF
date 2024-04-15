@@ -1,9 +1,5 @@
 #include "../header/landscape_init.h"
-
-static void	print_message(char *str)
-{
-	write(PRINT_MESSAGE_DESCRIPTOR, str, ft_strlen(str));
-}
+#include "../header/fdf.h"
 
 void	exit_with_error(char *str)
 {
@@ -29,12 +25,5 @@ void	usage_file_values()
 {
 	print_message("Wrong File Values!\n");
 	print_message("File must contain only integers that fits to size of 'int'\n");
-	exit(EXIT_FAILURE);
-}
-
-void	render_error()
-{
-	print_message("Rendering Error!\n");
-	print_message("Issue while trying to run rendering the landscape\n");
 	exit(EXIT_FAILURE);
 }

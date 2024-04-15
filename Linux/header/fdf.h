@@ -30,6 +30,20 @@
 # define BUTTONS_GAP 25
 # define BUTTONS_TOTAL 10
 # define BUTTONS_COLOR 0x00B69D3A
+# define BUTTONS_COLOR_HOVER 0x00FF00
+# define BUTTONS_NOT_HOVER -1
+
+// HOOK EVENT
+# define EVENT_KEYDOWN 2 // pressed
+# define EVENT_KEYUP 3 // released
+# define EVENT_MOUSEDOWN 4
+# define EVENT_MOUSEUP 5
+# define EVENT_MOUSEMOVE 6
+# define EVENT_EXPOSE 12
+# define EVENT_DESTROY 17
+
+// KEY CODES
+# define KEY_ESC 65307
 
 typedef struct Point
 {
@@ -47,16 +61,17 @@ typedef struct	ImageData {
 	t_Point	pos;
 	t_Point size;
 	int		color;
-	int		on_image;
 }	t_Image;
 
 typedef struct FdFData
 {
-	void		*mlx;
-	void		*mlx_window;
-	t_Image		*land;
-	t_Image		*table;
-	t_Image		**buttons;
+	void			*mlx;
+	void			*mlx_window;
+	t_LandscapeData	*land_data;
+	t_Image			*land_table;
+	t_Image			*option_table;
+	t_Image			**buttons;
+	int				button_index; // this will be used whenever mouse is on the button (-1 means no button is touched)
 } 	t_FdF;
 
 typedef struct InputData
@@ -68,45 +83,85 @@ typedef struct InputData
 /*
 	fdf_start.c functions
 
-	* fdf_init - initializing all 'fdf_data' fields, returns true on success, else false.
-	* fdf_start - makes all preparations and start the program.
+	* render_error - exit with message of issue while trying to render the landscape. 
+	* fdf_start - makes all preparations and starts the program.
 	* delete_fdf_data - deletes all feilds of 'fdf_data'.
-	* render_landscape - starting the program after preparations, returns true on success, else false.
-	* image_init - creates new 't_Image' type and returns it after initializing all fields.
-	* delete_buttons_image - deletes every button's image.
+	* start_program - starting the main logic of FdF, returns true on success, else false.
+	* fdf_data_init - initializing all 'fdf_data' fields, returns true on success, else false.
 */
-int		fdf_init(t_FdF *fdf_data);
+void	render_error();
 void	fdf_start(char *file_name);
 void	delete_fdf_data(t_FdF *fdf_data);
-int		render_landscape(t_LandscapeData *land_data);
-t_Image	*image_init(void *mlx, int x_size, int y_size);
+int		start_program(t_LandscapeData *land_data);
+int		fdf_data_init(t_FdF *fdf_data, t_LandscapeData *land_data);
+
+/*
+	buttons.c functions
+
+	* buttons_image_init - initializing all 'fdf_data->buttons' fields, returns true on success, else false.
+	* mouse_on_button - finds and returns the button index in which mouse cursor is pointing to.
+	* delete_buttons_image - delets all fields of 'fdf_data->buttons'.
+*/
+int		buttons_image_init(t_FdF *fdf_data);
+int		mouse_on_button(t_FdF *fdf_data, int x, int y);
 void	delete_buttons_image(t_FdF *fdf_data, int size);
 
 /*
-	fdf_draw.c functions
+	draw_shape.c functions
 
-	* render - displays all components of 'fdf_data'.
-	* input - hooks all inputs and initializes 'input_data' fields.
-	* draw_landscape - starting to draw landscape, returns true on success, else false.
+	* draw_rectangle_filled - draws rectangle filled with image's color.
 */
-void	render(t_FdF *fdf_data);
-void	input(t_FdF *fdf_data, t_Input *input_data);
-int		fdf_draw(t_LandscapeData *land_data, t_FdF *fdf_data);
+void draw_rectangle_filled(t_Image *img);
 
 /*
 	fdf_draw.c functions
 
-	* draw_rectangle - draws
+	* fdf_draw - draws UI and the landscape, eturns true on success, else false.
 */
-void draw_rectangle(t_Image *img);
+int	fdf_draw(t_FdF *fdf_data);
 
 /*
-	input_handler.c functions
+	input.c functions
 
-	* input_init - initialize all input combinations into their default state.
-	* key_press - checks what key is pressed and initializes 'input_data' field.
+	* input_close_window - called when top right window 'X' closing button is clicked.
+	* input_key_press - handles every 'key' that is pressed during the program.
+	* input_mouse_move - checks the mouse movement and updates 'fdf_data'.
 */
-void	input_init(t_Input *input_data);
-int		key_press(int key_code, t_Input *input_data);
+int	input_close_window(t_FdF *fdf_data);
+int	input_key_press(int key, t_FdF *fdf_data);
+int	input_mouse_move(int x, int y, t_FdF *fdf_data);
+
+/*
+	update.c functions
+
+	* update_end_program - deletes all allocated fields of 'fdf_data' and ends the program.
+	* update_buttons_hover - checks all buttons and changes the color of the button on which mouse hovers. 
+*/
+void	update_end_program(t_FdF *fdf_data);
+void	update_buttons_hover(t_FdF *fdf_data, int x, int y);
+
+/*
+	render.c functions
+
+	* render_all - draws every image of 'fdf_data'.
+*/
+void	put_image(t_FdF *fdf_data, t_Image *img);
+void	draw_button(t_FdF *fdf_data, int index);
+void	draw_option_table(t_FdF *fdf_data);
+void	draw_land_table(t_FdF *fdf_data);
+void	render_all(t_FdF *fdf_data);
+
+/*
+	utils.c functions
+
+	* print_message - prints the given 'str'.
+	* split_size - returns the size of split (str**).
+	* remove_last_enter - returns new string, but without last character if it was '\n'.
+	* image_init - creates 't_Image' by given mlx and (x,y) size.
+*/
+void	print_message(char *str);
+size_t	split_size(char **split);
+char	*remove_last_enter(char *line);
+t_Image	*image_init(void *mlx, int x_size, int y_size);
 
 #endif

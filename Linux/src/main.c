@@ -10,30 +10,21 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-// #define ESC_KEY 53
-
-// typedef struct s_vars {
-//     void *mlx;
-//     void *win;
-// } t_vars;
-
-// int key_hook(int keycode, t_vars *vars)
-// {
-// 	// printf("code: %d\n", keycode);
-//     if (keycode == 65307)
-//     {
-//         mlx_destroy_window(vars->mlx, vars->win);
-//         exit(0);
-//     }
-//     return (0);
+// int close_window(void *param) {
+// 	(void) param;
+//     printf("Window closed.\n");
+//     exit(0);
 // }
 
-// int main(void)
-// {
-//     t_vars vars;
+// int main() {
+//     void *mlx_ptr;
+//     void *win_ptr;
 
-//     vars.mlx = mlx_init();
-//     vars.win = mlx_new_window(vars.mlx, 800, 600, "Hello world!");
-//     mlx_key_hook(vars.win, key_hook, &vars);
-//     mlx_loop(vars.mlx);
+//     mlx_ptr = mlx_init();
+//     win_ptr = mlx_new_window(mlx_ptr, 800, 600, "Close Window Example");
+
+//     mlx_hook(win_ptr, 17, 0, close_window, NULL); // Hook for window close event
+//     mlx_loop(mlx_ptr);
+
+//     return 0;
 // }
