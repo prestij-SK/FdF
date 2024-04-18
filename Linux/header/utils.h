@@ -27,6 +27,19 @@ typedef struct Point3D
 	int	z;
 }	t_Point3D;
 
+typedef struct Point2D_double
+{
+	int	x;
+	int	y;
+}	t_Point2D_d;
+
+typedef struct Point3D_double
+{
+	int	x;
+	int	y;
+	int	z;
+}	t_Point3D_d;
+
 /*
 	utils.c functions
 	

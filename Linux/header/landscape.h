@@ -5,7 +5,7 @@
 # include "file_control.h"
 
 // COORDINATE DEFAULT OPTIONS
-# define COORD_X_START 600
+# define COORD_X_START 500
 # define COORD_Y_START 200
 # define COORD_X_GAP 50
 # define COORD_Y_GAP 50

@@ -10,6 +10,7 @@ int	input_mouse_move(int x, int y, t_FdF *fdf_data)
 
 int	input_key_press(int key, t_FdF *fdf_data)
 {
+	printf("%d: \n", key);
 	if (!fdf_data)
 		return (0);
 	if (key == KEY_ESC)
