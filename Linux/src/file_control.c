@@ -1,10 +1,8 @@
 #include "../header/file_control.h"
-#include "../header/landscape_init.h"
-#include "../header/fdf.h"
 
 void	delete_file_data(t_FileData *file_data)
 {
-	size_t	i;
+	int	i;
 
 	if (!file_data)
 		return ;
@@ -20,11 +18,11 @@ void	delete_file_data(t_FileData *file_data)
 	}
 	free(file_data->file_content);
 	file_data->file_content = NULL;
-	file_data->row = 0;
-	file_data->column = 0;
-	if (close(file_data->descriptor) == ERROR_CODE)
+	file_data->row = ERROR_VALUE;
+	file_data->column = ERROR_VALUE;
+	if (close(file_data->descriptor) == ERROR_VALUE)
 		exit_with_error("File Closing Error!\n");
-	file_data->descriptor = -1;
+	file_data->descriptor = ERROR_VALUE;
 }
 
 static void	set_row_and_column(t_FileData *file_data, char *file_name)
@@ -35,7 +33,7 @@ static void	set_row_and_column(t_FileData *file_data, char *file_name)
 	if (!file_data)
 		return ;
 	descriptor = open(file_name, O_RDONLY);
-	if (descriptor == ERROR_CODE)
+	if (descriptor == ERROR_VALUE)
 		exit_with_error("File Openning Error!\n");
 	file_data->row = 0;
 	line = get_next_line(descriptor);
@@ -54,7 +52,7 @@ static void	set_row_and_column(t_FileData *file_data, char *file_name)
 		line = get_next_line(descriptor);
 	}
 	file_data->column = 0;
-	if (close(descriptor) == ERROR_CODE)
+	if (close(descriptor) == ERROR_VALUE)
 		exit_with_error("File Closing Error!\n");
 }
 
@@ -77,7 +75,7 @@ static int	split_and_add_line(t_FileData *file_data, char *line)
 {
 	char	**new_split;
 	char	*temp;
-	size_t	size;
+	int		size;
 
 	if (!file_data)
 		return (0);
@@ -113,13 +111,13 @@ static int	parse_content(t_FileData *file_data)
 	{
 		if (!check_line_symbols(line))
 		{
-			get_next_line(ERROR_CODE);
+			get_next_line(ERROR_VALUE);
 			free(line);
 			return (0);
 		}
 		if (!split_and_add_line(file_data, line))
 		{
-			get_next_line(ERROR_CODE);
+			get_next_line(ERROR_VALUE);
 			free(line);
 			return (0);	
 		}
@@ -137,7 +135,7 @@ int	file_data_init(t_FileData *file_data, char *file_name)
 	if (file_data->row == 0)
 		return (0);
 	set_descriptor(file_data, file_name);
-	if (file_data->descriptor == ERROR_CODE)
+	if (file_data->descriptor == ERROR_VALUE)
 		exit_with_error("File Openning Error!\n");
 	set_content_alloc(file_data);
 	if (!file_data->file_content)

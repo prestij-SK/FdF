@@ -1,4 +1,4 @@
-#include "../header/landscape_init.h"
+#include "../header/utils.h"
 
 int	check_file_name(char *file_name)
 {

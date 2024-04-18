@@ -24,3 +24,14 @@ int	input_close_window(t_FdF *fdf_data)
 	update_end_program(fdf_data);
 	return (1);
 }
+
+int	input_mouse_button(int button, int x, int y, t_FdF *fdf_data)
+{
+	(void) x;
+	(void) y;
+	if (!fdf_data)
+		return (0);
+	if (button == LEFT_CLICK)
+		update_mouse_left_click(fdf_data);
+	return (1);
+}

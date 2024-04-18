@@ -8,16 +8,18 @@ SRCS_DIR = src/
 OBJS_DIR = obj/
 HEADERS_DIR = header/
 
-SRCS_NAME = buttons.c \
-			draw_shape.c \
+SRCS_NAME = draw_shape.c \
+			draw_utils.c \
 			error_handling.c \
-			fdf_draw.c \
 			fdf_start.c \
+			fdf_utils.c \
 			file_control.c \
 			get_next_line_utils.c \
 			get_next_line.c \
+			images.c \
 			input.c \
-			landscape_init.c \
+			landscape_utils.c \
+			landscape.c \
 			libft_funcs.c \
 			main.c \
 			render.c \
@@ -25,10 +27,13 @@ SRCS_NAME = buttons.c \
 			utils.c \
 			validation.c \
 
-HEADERS = fdf.h \
-          file_control.h \
+HEADERS = draw.h \
+		  fdf.h \
+		  file_control.h \
 		  get_next_line.h \
-		  landscape_init.h \
+		  images.h \
+		  landscape.h \
+		  utils.h \
 
 OBJS = $(addprefix $(OBJS_DIR), $(OBJS_NAME))
 OBJS_NAME = $(SRCS_NAME:.c=.o)

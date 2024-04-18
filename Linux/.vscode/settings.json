@@ -1,6 +1,12 @@
 {
 	"files.associations": {
 		"fdf.h": "c",
-		"typeinfo": "c"
+		"typeinfo": "c",
+		"landscape.h": "c",
+		"mlx.h": "c",
+		"image.h": "c",
+		"file_control.h": "c",
+		"images.h": "c",
+		"utils.h": "c"
 	}
 }

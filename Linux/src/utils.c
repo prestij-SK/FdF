@@ -1,4 +1,4 @@
-#include "../header/fdf.h"
+#include "../header/utils.h"
 
 void	print_message(char *str)
 {
@@ -43,27 +43,9 @@ char	*remove_last_enter(char *line)
 	return (new_line);
 }
 
-t_Image	*image_init(void *mlx, int x_size, int y_size)
+void	swap_int(int *a, int *b)
 {
-	t_Image	*new_img;
-
-	if (!mlx)
-		return (NULL);
-	new_img = (t_Image *)malloc(sizeof(t_Image));
-	if (!new_img)
-		return (NULL);
-	new_img->img = mlx_new_image(mlx, x_size, y_size);
-	if (!new_img->img)
-	{
-		free(new_img);
-		return (NULL);
-	}
-	new_img->addr = mlx_get_data_addr(new_img->img, &new_img->bits_per_pixel,
-										&new_img->line_length, &new_img->endian);
-	if (!new_img->addr)
-	{
-		free(new_img);
-		return (NULL);
-	}
-	return (new_img);
+    int temp = *a;
+    *a = *b;
+    *b = temp;
 }

@@ -1,16 +1,15 @@
 #ifndef FILE_CONTROL_H
 # define FILE_CONTROL_H
 
+# include "utils.h"
 # include "get_next_line.h"
-
-# define ERROR_CODE -1
 
 typedef struct FileData
 {
 	char	***file_content;
-	size_t	row;
-	size_t	column;
-	size_t	row_iter;
+	int		row;
+	int		column;
+	int		row_iter;
 	int		descriptor;
 } 	t_FileData;
 
