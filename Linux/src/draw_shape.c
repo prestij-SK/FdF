@@ -29,12 +29,12 @@ void    draw_rectangle_filled(t_Image *img)
     }
 }
 
-void    draw_line_Bresenham(t_Image *img, t_Point2D start, t_Point2D end)
+int draw_line_Bresenham(t_Image *img, t_Point2D start, t_Point2D end)
 {
     t_BresenhamUtils    util;
 
     if (!img)
-        return ;
+        return (ERROR_VALUE);
     util.steep = is_steep(start, end); // Check if the line is steep
     // Swap coordinates if the line is steep to simplify calculations
     if (util.steep)
@@ -61,10 +61,12 @@ void    draw_line_Bresenham(t_Image *img, t_Point2D start, t_Point2D end)
     while (util.temp.x != end.x)
     {
         // Plot the point, taking into account whether the line is steep or not
-        if (util.steep)
+        if (util.steep && in_range(util.temp.y, util.temp.x, img->size.x, img->size.y))
             alt_mlx_pixel_put(img, util.temp.y, util.temp.x, LINE_COLOR);
-        else
+        else if (!util.steep && in_range(util.temp.x, util.temp.y, img->size.x, img->size.y))
             alt_mlx_pixel_put(img, util.temp.x, util.temp.y, LINE_COLOR);
+        else
+            return (0); // this will quit the function if the coordinates are not in image's range
         util.temp.x += util.step.x; // Move to the next x coordinate
 
         // Update decision parameter and y coordinate if necessary
@@ -75,6 +77,7 @@ void    draw_line_Bresenham(t_Image *img, t_Point2D start, t_Point2D end)
         }
         util.plot += 2 * util.delta.y; // Update decision parameter for the next point
     }
+    return (1);
 }
 
 void    draw_landscape_horizontal_lines(t_Landscape *land_data, t_Image *land_table)
@@ -90,11 +93,15 @@ void    draw_landscape_horizontal_lines(t_Landscape *land_data, t_Image *land_ta
     while (i < land_data->size.y)
     {
         j = 0;
+        landscape_set_coord(land_data, &start, j, i);
         while (j < land_data->size.x - 1)
         {
-            landscape_set_coord(land_data, &start, j, i);
+            
             landscape_set_coord(land_data, &end, j + 1, i);
-            draw_line_Bresenham(land_table, start, end);
+            if (!draw_line_Bresenham(land_table, start, end))
+                break ;
+            start.x = end.x;
+            start.y = end.y;
             ++j;
         }
         ++i;
@@ -111,14 +118,17 @@ void    draw_landscape_vertical_lines(t_Landscape *land_data, t_Image *land_tabl
     if (!land_data || !land_table)
         return ;
     i = 0;
-    while (i < land_data->size.y - 1)
+    while (i < land_data->size.x)
     {
         j = 0;
-        while (j < land_data->size.x)
+        landscape_set_coord(land_data, &start, i, j);
+        while (j < land_data->size.y - 1)
         {
-            landscape_set_coord(land_data, &start, j, i);
-            landscape_set_coord(land_data, &end, j, i + 1);
-            draw_line_Bresenham(land_table, start, end);
+            landscape_set_coord(land_data, &end, i, j + 1);
+            if (!draw_line_Bresenham(land_table, start, end))
+                break ;
+            start.x = end.x;
+            start.y = end.y;
             ++j;
         }
         ++i;

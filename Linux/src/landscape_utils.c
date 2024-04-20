@@ -4,13 +4,13 @@ static void	landscape_gap_default(t_Landscape *land_data, int table_x, int table
 {
 	if (!land_data)
 		return ;
-	if (land_data->size.x > table_x || land_data->size.y > table_y)
+	if (land_data->size.x > table_x / 5 || land_data->size.y > table_y / 2)
 	{
 		land_data->setup.gap.x = COORD_X_GAP_LOW;
 		land_data->setup.gap.y = COORD_Y_GAP_LOW;
 		return ;
 	}
-	else if (land_data->size.x > (table_x / 2) || land_data->size.y > (table_y / 2))
+	else if (land_data->size.x > (table_x / 10) || land_data->size.y > (table_y / 4))
 	{
 		land_data->setup.gap.x = COORD_X_GAP_MID;
 		land_data->setup.gap.y = COORD_Y_GAP_MID;
@@ -47,12 +47,24 @@ static void	landscape_angles_default(t_Landscape *land_data)
 	land_data->setup.rotate_angle = get_radians(COORD_ROTATE_ANGLE);
 }
 
+static void landscape_other_setups(t_Landscape *land_data)
+{
+	if (!land_data)
+		return ;
+	land_data->setup.move = COORD_PIXEL_MOVE_RANGE;
+	land_data->setup.zoom = COORD_PIXEL_ZOOM_RANGE;
+}
+
 static void	landscape_input_default(t_Landscape *land_data)
 {
 	if (!land_data)
 		return ;
-	land_data->input.is_moved = 0;
-	land_data->input.is_zoomed = 0;
+	land_data->input.is_moved_right = 0;
+	land_data->input.is_moved_left = 0;
+	land_data->input.is_moved_up = 0;
+	land_data->input.is_moved_down = 0;
+	land_data->input.is_zoomed_in = 0;
+	land_data->input.is_zoomed_out = 0;
 	land_data->input.x_rotated = 0;
 	land_data->input.y_rotated = 0;
 	land_data->input.z_rotated = 0;
@@ -65,6 +77,7 @@ void	landscape_set_default(t_Landscape *land_data, int table_x, int table_y)
 	landscape_gap_default(land_data, table_x, table_y);
 	landscape_coords_default(land_data);
 	landscape_angles_default(land_data);
+	landscape_other_setups(land_data);
 	land_data->setup.move = COORD_PIXEL_MOVE_RANGE;
 	land_data->setup.color = COORD_LINE_COLOR;
 	land_data->setup.vertex_color = COORD_VERTEX_COLOR;
@@ -73,10 +86,20 @@ void	landscape_set_default(t_Landscape *land_data, int table_x, int table_y)
 
 void	landscape_set_coord(t_Landscape *land_data, t_Point2D *coord, int index_x, int index_y)
 {
+	t_Point2D	new_gap;
+
 	if (!land_data || !coord)
 		return ;
+	// new_gap.x = land_data->setup.gap.x;
+	// new_gap. = land_data->setup.gap.x;
+	// if (land_data->setup.zoom)
 	coord->x = (index_x * land_data->setup.gap.x) + land_data->setup.start.x;
 	coord->y = (index_y * land_data->setup.gap.y) + land_data->setup.start.y;
+	// if (land_data->input.is_moved)
+	// {
+	// 	coord->x += land_data->setup.move;
+	// 	coord->y +=
+	// }
 	// x rotate
 	// y rotate
 	// z rotate
