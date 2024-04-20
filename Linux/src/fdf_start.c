@@ -36,6 +36,7 @@ int	fdf_data_init(t_FdF *fdf_data, t_FileData *file_data)
 	if (!fdf_data->mlx_window)
 		return (0);
 	fdf_data->land_data = create_landscape_data(file_data);
+	landscape_set_default(fdf_data->land_data, LAND_X_SIZE, LAND_Y_SIZE);
 	if (!fdf_data->land_data)
 		return (0);
 	fdf_data->land_table = create_land_image(fdf_data->mlx);
@@ -64,7 +65,7 @@ int		start_program(t_FdF *fdf_data)
 	if (!fdf_data)
 		return (0);
 	render_all(fdf_data);
-	input_update_render(fdf_data);
+	// input_update_render(fdf_data);
 	mlx_loop(fdf_data->mlx);
 	return (1);
 }

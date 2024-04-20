@@ -36,15 +36,15 @@ t_Image	*create_option_image(void *mlx)
 {
 	t_Image	*new_image;
 
-	new_image = create_image(mlx, TABLE_X_SIZE, TABLE_Y_SIZE);
+	new_image = create_image(mlx, OPTION_X_SIZE, OPTION_Y_SIZE);
 	if (!new_image)
 		return (NULL);
 	new_image->name = "Option Table";
-	new_image->pos.x = TABLE_X_POSITION;
-	new_image->pos.y = TABLE_Y_POSITION;
-	new_image->size.x = TABLE_X_SIZE;
-	new_image->size.y = TABLE_Y_SIZE;
-	new_image->color = TABLE_COLOR;
+	new_image->pos.x = OPTION_X_POSITION;
+	new_image->pos.y = OPTION_Y_POSITION;
+	new_image->size.x = OPTION_X_SIZE;
+	new_image->size.y = OPTION_Y_SIZE;
+	new_image->color = OPTION_COLOR;
 	return (new_image);
 }
 

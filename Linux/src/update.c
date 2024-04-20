@@ -47,8 +47,8 @@ void	update_mouse_left_click(t_FdF *fdf_data)
 		printf("Con\n");
 	else if (!ft_strncmp(temp_str, "Spin Left", 9))
 	{
-		rotate_landscape(fdf_data->land_data, COORD_ANGLE);
-		render_land_table(fdf_data);
+		// rotate_landscape(fdf_data->land_data, COORD_ANGLE);
+		// render_land_table(fdf_data);
 	}
 	else if (!ft_strncmp(temp_str, "Spin Right", 10))
 		printf("SpinR\n");

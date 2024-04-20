@@ -25,13 +25,13 @@ int	landscape_init(t_Landscape *land_data, t_FileData *file_data)
 
 	if (!land_data || !file_data)
 		return (0);
-	land_data->map = (t_Point3D **)malloc(sizeof(t_Point3D *) * file_data->row);
+	land_data->map = (int **)malloc(sizeof(int *) * file_data->row);
 	if (!land_data->map)
 		return (0);
 	i = 0;
 	while (i < file_data->row)
 	{
-		land_data->map[i] = (t_Point3D *)malloc(sizeof(t_Point3D) * file_data->column);
+		land_data->map[i] = (int *)malloc(sizeof(int) * file_data->column);
 		if (!land_data->map[i])
 		{
 			while (i >= 0)
@@ -67,9 +67,7 @@ int	assign_file_to_landscape(t_Landscape *land_data, t_FileData *file_data)
 			num = ft_atoll(file_data->file_content[i][j]);
 			if (!check_value_size(num))
 				return (0);
-			land_data->map[i][j].x = 0;
-			land_data->map[i][j].y = 0;
-			land_data->map[i][j].z = (int)num;
+			land_data->map[i][j] = (int)num;
 			++j;
 		}
 		++i;
@@ -77,34 +75,34 @@ int	assign_file_to_landscape(t_Landscape *land_data, t_FileData *file_data)
 	return (1);
 }
 
-void	set_landscape_default(t_Landscape *land_data)
-{
-	int	x_new;
-	int	y_new;
-	int	i;
-	int	j;
+// void	set_landscape_default(t_Landscape *land_data)
+// {
+// 	int	x_new;
+// 	int	y_new;
+// 	int	i;
+// 	int	j;
 
-	if (!land_data)
-		return ;
-	x_new = COORD_X_START;
-	y_new = COORD_Y_START;
-	i = 0;
-	while (i < land_data->size.y)
-	{
-		j = 0;
-		while (j < land_data->size.x)
-		{
-			land_data->map[i][j].x = x_new;
-			land_data->map[i][j].y = y_new;
-			x_new += COORD_X_GAP;
-			++j;
-		}
-		x_new = COORD_X_START;
-		y_new += COORD_Y_GAP;
-		++i;
-	}
-	// rotate_landscape(land_data, COORD_ANGLE);
-}
+// 	if (!land_data)
+// 		return ;
+// 	x_new = COORD_X_START;
+// 	y_new = COORD_Y_START;
+// 	i = 0;
+// 	while (i < land_data->size.y)
+// 	{
+// 		j = 0;
+// 		while (j < land_data->size.x)
+// 		{
+// 			land_data->map[i][j].x = x_new;
+// 			land_data->map[i][j].y = y_new;
+// 			x_new += COORD_X_GAP;
+// 			++j;
+// 		}
+// 		x_new = COORD_X_START;
+// 		y_new += COORD_Y_GAP;
+// 		++i;
+// 	}
+// 	// rotate_landscape(land_data, COORD_ANGLE);
+// }
 
 t_Landscape	*create_landscape_data(t_FileData *file_data)
 {
@@ -124,6 +122,5 @@ t_Landscape	*create_landscape_data(t_FileData *file_data)
 	}
 	new_land_data->size.x = file_data->column;
 	new_land_data->size.y = file_data->row;
-	set_landscape_default(new_land_data);
 	return (new_land_data);
 }

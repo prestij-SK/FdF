@@ -36,7 +36,7 @@ void	render_land_table(t_FdF *fdf_data)
 {
 	if (!fdf_data)
 		return ;
-	draw_rectangle_filled(fdf_data->land_table);
+	draw_rectangle_filled(fdf_data->land_table); // clears the land table with it's color
 	draw_landscape(fdf_data->land_data, fdf_data->land_table);
 	render_image(fdf_data, fdf_data->land_table);
 }

@@ -1,19 +1,79 @@
 #include "../header/fdf.h"
 
-// int	main(int argc, char **argv)
-// {
-// 	if (argc != 2 || !argv)
-// 	{
-// 		usage_arguments();
-// 	}
-// 	fdf_start(argv[1]);
-// 	return (0);
+int	main(int argc, char **argv)
+{
+	if (argc != 2 || !argv)
+	{
+		usage_arguments();
+	}
+	fdf_start(argv[1]);
+	return (0);
+}
+
+
+// # include "../mlx_linux/mlx.h"
+// #include <stdlib.h>
+
+// #define WIN_WIDTH 800
+// #define WIN_HEIGHT 600
+// #define RECT_WIDTH 200
+// #define RECT_HEIGHT 150
+
+// typedef struct s_vars {
+//     void *mlx;
+//     void *win;
+//     int rect_width;
+//     int rect_height;
+//     int win_width;
+//     int win_height;
+//     int rect_x; // x coordinate of the top-left corner of the rectangle
+//     int rect_y; // y coordinate of the top-left corner of the rectangle
+// } t_vars;
+
+// void draw_rectangle(t_vars *vars) {
+//     mlx_clear_window(vars->mlx, vars->win); // Clear the window first
+
+//     mlx_string_put(vars->mlx, vars->win, 10, 10, 0xFFFFFF, "Press Z to zoom in, X to zoom out");
+//     mlx_string_put(vars->mlx, vars->win, 10, 30, 0xFFFFFF, "Press ESC to exit");
+
+//     for (int i = vars->rect_x; i < vars->rect_x + vars->rect_width; i++) {
+//         for (int j = vars->rect_y; j < vars->rect_y + vars->rect_height; j++) {
+//             mlx_pixel_put(vars->mlx, vars->win, i, j, 0xFF0000);
+//         }
+//     }
 // }
 
+// int key_hook(int keycode, t_vars *vars) {
+//     if (keycode == 53) // ESC key
+//         exit(0);
+//     else if (keycode == 100) { // Z key
+//         vars->rect_width *= 2;
+//         vars->rect_height *= 2;
+//     } else if (keycode == 97) { // X key
+//         vars->rect_width /= 2;
+//         vars->rect_height /= 2;
+//     }
+//     draw_rectangle(vars);
+//     return (0);
+// }
 
+// int main(void) {
+//     t_vars vars;
 
+//     vars.mlx = mlx_init();
+//     vars.win = mlx_new_window(vars.mlx, WIN_WIDTH, WIN_HEIGHT, "Zoom Rectangle");
+//     vars.win_width = WIN_WIDTH;
+//     vars.win_height = WIN_HEIGHT;
+//     vars.rect_width = RECT_WIDTH;
+//     vars.rect_height = RECT_HEIGHT;
+//     vars.rect_x = (WIN_WIDTH - RECT_WIDTH) / 4; // Example: 1/4 of the window width
+//     vars.rect_y = (WIN_HEIGHT - RECT_HEIGHT) / 4; // Example: 1/4 of the window height
 
-
+//     mlx_hook(vars.win, 2, 1L<<0, key_hook, &vars); // key press events
+//     draw_rectangle(&vars);
+//     mlx_loop(vars.mlx);
+//     return (0);
+// }
 
 
 

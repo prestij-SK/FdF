@@ -14,6 +14,7 @@ SRCS_NAME = draw_shape.c \
 			fdf_start.c \
 			fdf_utils.c \
 			file_control.c \
+			for_math.c \
 			get_next_line_utils.c \
 			get_next_line.c \
 			images.c \
@@ -30,6 +31,7 @@ SRCS_NAME = draw_shape.c \
 HEADERS = draw.h \
 		  fdf.h \
 		  file_control.h \
+		  for_math.h \
 		  get_next_line.h \
 		  images.h \
 		  landscape.h \

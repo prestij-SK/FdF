@@ -7,6 +7,8 @@
 # include <fcntl.h>
 # include <math.h>
 
+#include "for_math.h"
+
 # define PRINT_MESSAGE_DESCRIPTOR 1
 # define ERROR_VALUE -1
 # define INT_DIGITS 10
@@ -14,13 +16,13 @@
 # define MAX_INT 2147483647
 # define MIN_INT -2147483648
 
-typedef struct Point2D
+typedef struct Point2D_int
 {
 	int	x;
 	int	y;
 }	t_Point2D;
 
-typedef struct Point3D
+typedef struct Point3D_int
 {
 	int	x;
 	int	y;
@@ -29,15 +31,15 @@ typedef struct Point3D
 
 typedef struct Point2D_double
 {
-	int	x;
-	int	y;
+	double	x;
+	double	y;
 }	t_Point2D_d;
 
 typedef struct Point3D_double
 {
-	int	x;
-	int	y;
-	int	z;
+	double	x;
+	double	y;
+	double	z;
 }	t_Point3D_d;
 
 /*

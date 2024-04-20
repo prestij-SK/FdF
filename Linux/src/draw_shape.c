@@ -92,10 +92,8 @@ void    draw_landscape_horizontal_lines(t_Landscape *land_data, t_Image *land_ta
         j = 0;
         while (j < land_data->size.x - 1)
         {
-            start.x = land_data->map[i][j].x;
-            start.y = land_data->map[i][j].y;
-            end.x = land_data->map[i][j + 1].x;
-            end.y = land_data->map[i][j + 1].y;
+            landscape_set_coord(land_data, &start, j, i);
+            landscape_set_coord(land_data, &end, j + 1, i);
             draw_line_Bresenham(land_table, start, end);
             ++j;
         }
@@ -118,10 +116,8 @@ void    draw_landscape_vertical_lines(t_Landscape *land_data, t_Image *land_tabl
         j = 0;
         while (j < land_data->size.x)
         {
-            start.x = land_data->map[i][j].x;
-            start.y = land_data->map[i][j].y;
-            end.x = land_data->map[i + 1][j].x;
-            end.y = land_data->map[i + 1][j].y;
+            landscape_set_coord(land_data, &start, j, i);
+            landscape_set_coord(land_data, &end, j, i + 1);
             draw_line_Bresenham(land_table, start, end);
             ++j;
         }

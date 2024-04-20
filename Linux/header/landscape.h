@@ -5,35 +5,52 @@
 # include "file_control.h"
 
 // COORDINATE DEFAULT OPTIONS
-# define COORD_X_START 500
-# define COORD_Y_START 200
-# define COORD_X_GAP 50
-# define COORD_Y_GAP 50
-# define COORD_ANGLE 10
+# define COORD_X_START 100
+# define COORD_Y_START 50
+# define COORD_X_GAP_LOW 5
+# define COORD_Y_GAP_LOW 5
+# define COORD_X_GAP_MID 20
+# define COORD_Y_GAP_MID 20
+# define COORD_X_GAP_BIG 50
+# define COORD_Y_GAP_BIG 50
+# define COORD_X_ANGLE 45
+# define COORD_Y_ANGLE 45
+# define COORD_Z_ANGLE 45
+# define COORD_ROTATE_ANGLE 5
+# define COORD_PIXEL_MOVE_RANGE 2
+# define COORD_LINE_COLOR 0x00FF00
+# define COORD_VERTEX_COLOR 0xFF0000
 
-// ROTATING OPTIONS
-# define ROTATE_LEFT -1
-# define ROTATE_RIGHT 1
-
-// MATH
-# ifndef M_PI
-#  define M_PI 3.14159265358979323846
-# endif
-
-// this is for Norminette only
-typedef struct LandscapeUtils
+typedef struct LandscapeInputInfo
 {
-	t_Point2D	temp;
-	int			angle;
-	double		radian;
-}	t_LandscapeUtils;
+	int	is_moved;
+	int	is_zoomed;
+	int	x_rotated;
+	int	y_rotated;
+	int	z_rotated;
+}	t_LandInput;
+
+typedef struct LandscapeSetup
+{
+	t_Point2D	gap;
+	t_Point2D	start;
+	t_Point2D	end;
+	t_Point2D	center;
+	t_Point3D_d	angles; // x, y, z current angles in radians
+	double		rotate_angle; // in radians
+	int			move;
+	int			zoom;
+	int			color; // line colors
+	int			vertex_color; // line colors for z != 0
+	// other stuff
+}	t_LandSetup;
 
 typedef struct LandscapeData
 {
-	t_Point3D	**map;
-	t_Point2D	size;
-	// other stuff
-	int			color;
+	int			**map; // z values
+	t_Point2D	size; // matrix width(x) and height(y)
+	t_LandSetup	setup; // valus of moving/zooming/rotating
+	t_LandInput	input; // input checks for updating
 }	t_Landscape;
 
 /*
@@ -53,6 +70,8 @@ int			assign_file_to_landscape(t_Landscape *land_data, t_FileData *file_data);
 	landscape_utils.c functions
 
 */
-void	rotate_landscape(t_Landscape *land_data, int angle);
+// void	rotate_landscape(t_Landscape *land_data, int angle);
+void	landscape_set_default(t_Landscape *land_data, int table_x, int table_y);
+void	landscape_set_coord(t_Landscape *land_data, t_Point2D *coord, int index_x, int index_y);
 
 #endif

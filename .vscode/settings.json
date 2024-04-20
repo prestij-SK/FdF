@@ -1,5 +1,16 @@
 {
 	"files.associations": {
-		"fdf.h": "c"
+		"fdf.h": "c",
+		"utils.h": "c",
+		"for_math.h": "c",
+		"landscape.h": "c",
+		"stdio.h": "c",
+		"array": "c",
+		"deque": "c",
+		"string": "c",
+		"unordered_map": "c",
+		"vector": "c",
+		"string_view": "c",
+		"initializer_list": "c"
 	}
 }
