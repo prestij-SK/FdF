@@ -13,11 +13,11 @@
 # define COORD_Y_GAP_MID 20
 # define COORD_X_GAP_BIG 40
 # define COORD_Y_GAP_BIG 40
-# define COORD_X_ANGLE 45
-# define COORD_Y_ANGLE 45
-# define COORD_Z_ANGLE 45
+# define COORD_X_ANGLE 0
+# define COORD_Y_ANGLE 0
+# define COORD_Z_ANGLE 0
 # define COORD_ROTATE_ANGLE 5
-# define COORD_PIXEL_MOVE_RANGE 5
+# define COORD_PIXEL_MOVE_RANGE 7
 # define COORD_PIXEL_ZOOM_RANGE 3
 # define COORD_LINE_COLOR 0x00FF00
 # define COORD_VERTEX_COLOR 0xFF0000
@@ -30,7 +30,6 @@ typedef struct LandscapeSetup
 	t_Point2D	center;
 	t_Point3D_d	angles; // x, y, z current angles in radians
 	t_Point2D	move;
-	double		rotate_angle; // in radians
 	int			zoom;
 	int			color; // line colors
 	int			vertex_color; // line colors for z != 0

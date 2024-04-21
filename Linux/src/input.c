@@ -23,6 +23,18 @@ int	input_key_press(int key, t_FdF *fdf_data)
 		update_up_arrow_key(fdf_data);
 	else if (key == KEY_DOWN_ARROW)
 		update_down_arrow_key(fdf_data);
+	else if (key == KEY_X)
+		update_X_key(fdf_data);
+	else if (key == KEY_Y)
+		update_Y_key(fdf_data);
+	else if (key == KEY_Z)
+		update_Z_key(fdf_data);
+	else if (key == KEY_A)
+		update_A_key(fdf_data);
+	else if (key == KEY_B)
+		update_B_key(fdf_data);
+	else if (key == KEY_C)
+		update_C_key(fdf_data);
 	return (1);
 }
 

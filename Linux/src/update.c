@@ -1,4 +1,5 @@
 #include "../header/fdf.h"
+#include "../header/for_math.h"
 
 void	update_end_program(t_FdF *fdf_data)
 {
@@ -36,6 +37,8 @@ void	update_mouse_scroll_up(t_FdF *fdf_data)
 	if (!fdf_data)
 		return ;
 	fdf_data->land_data->setup.zoom += COORD_PIXEL_ZOOM_RANGE;
+	// fdf_data->land_data->setup.center.x += ((fdf_data->land_data->size.x - 1) * COORD_PIXEL_ZOOM_RANGE);
+	// fdf_data->land_data->setup.center.y += ((fdf_data->land_data->size.y - 1) * COORD_PIXEL_ZOOM_RANGE);
 }
 
 void	update_mouse_scroll_down(t_FdF *fdf_data)
@@ -45,6 +48,8 @@ void	update_mouse_scroll_down(t_FdF *fdf_data)
 	if (!can_zoom_out(fdf_data->land_data))
 		return ;
 	fdf_data->land_data->setup.zoom -= COORD_PIXEL_ZOOM_RANGE;
+	// fdf_data->land_data->setup.center.x -= ((fdf_data->land_data->size.x - 1) * COORD_PIXEL_ZOOM_RANGE);
+	// fdf_data->land_data->setup.center.y -= ((fdf_data->land_data->size.y - 1)* COORD_PIXEL_ZOOM_RANGE);
 }
 
 void	update_left_arrow_key(t_FdF *fdf_data)
@@ -52,13 +57,15 @@ void	update_left_arrow_key(t_FdF *fdf_data)
 	if (!fdf_data)
 		return ;
 	fdf_data->land_data->setup.move.x -= COORD_PIXEL_MOVE_RANGE;
+	// fdf_data->land_data->setup.center.x -= COORD_PIXEL_MOVE_RANGE;
 }
 
 void	update_right_arrow_key(t_FdF *fdf_data)
 {
 	if (!fdf_data)
 		return ;
-	fdf_data->land_data->setup.move.x += COORD_PIXEL_MOVE_RANGE;	
+	fdf_data->land_data->setup.move.x += COORD_PIXEL_MOVE_RANGE;
+	// fdf_data->land_data->setup.center.x += COORD_PIXEL_MOVE_RANGE;
 }
 
 void	update_up_arrow_key(t_FdF *fdf_data)
@@ -66,6 +73,7 @@ void	update_up_arrow_key(t_FdF *fdf_data)
 	if (!fdf_data)
 		return ;
 	fdf_data->land_data->setup.move.y -= COORD_PIXEL_MOVE_RANGE;
+	// fdf_data->land_data->setup.center.y -= COORD_PIXEL_MOVE_RANGE;
 }
 
 void	update_down_arrow_key(t_FdF *fdf_data)
@@ -73,8 +81,56 @@ void	update_down_arrow_key(t_FdF *fdf_data)
 	if (!fdf_data)
 		return ;
 	fdf_data->land_data->setup.move.y += COORD_PIXEL_MOVE_RANGE;
+	// fdf_data->land_data->setup.center.y += COORD_PIXEL_MOVE_RANGE;
 }
 
+// Rotation X axis to right
+void	update_X_key(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return ;
+	fdf_data->land_data->setup.angles.x += get_radians(COORD_ROTATE_ANGLE);
+}
+
+// Rotation Y axis to right
+void	update_Y_key(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return ;
+	fdf_data->land_data->setup.angles.y += get_radians(COORD_ROTATE_ANGLE);
+}
+
+// Rotation Z axis to right
+void	update_Z_key(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return ;
+	fdf_data->land_data->setup.angles.z += get_radians(COORD_ROTATE_ANGLE);
+}
+
+// Rotation X axis to left
+void	update_A_key(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return ;
+	fdf_data->land_data->setup.angles.x -= get_radians(COORD_ROTATE_ANGLE);
+}
+
+// Rotation Y axis to left
+void	update_B_key(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return ;
+	fdf_data->land_data->setup.angles.y -= get_radians(COORD_ROTATE_ANGLE);
+}
+
+// Rotation Z axis to left
+void	update_C_key(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return ;
+	fdf_data->land_data->setup.angles.z -= get_radians(COORD_ROTATE_ANGLE);
+}
 
 // We don't need x and y, as fdf_data will have hover button's active index
 void	update_mouse_left_click(t_FdF *fdf_data)

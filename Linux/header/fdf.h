@@ -26,6 +26,12 @@
 # define KEY_RIGHT_ARROW 65363
 # define KEY_UP_ARROW 65362
 # define KEY_DOWN_ARROW 65364
+# define KEY_X 120
+# define KEY_Y 121
+# define KEY_Z 122
+# define KEY_A 97
+# define KEY_B 98
+# define KEY_C 99
 
 // MOUSE CODES
 # define LEFT_CLICK 1
@@ -72,6 +78,7 @@ int	input_mouse_button(int button, int x, int y, t_FdF *fdf_data);
 /*
 	update.c functions
 
+	* update_XYZABC_key - these functions are for rotating for X,Y,Z axis. The ABC do the same but rotation to opposite side (to left).
 	* update_end_program - deletes all allocated fields of 'fdf_data' and ends the program.
 	* update_up_arrow_key - operation for UP arrow key (move up).
 	* update_down_arrow_key - operation for DOWN arrow key (move down).
@@ -82,6 +89,12 @@ int	input_mouse_button(int button, int x, int y, t_FdF *fdf_data);
 	* update_mouse_scroll_down - operation for mouse scroll down (which is zoom out).
 	* update_buttons_hover - checks all buttons and changes the color of the button on which mouse hovers. 
 */
+void	update_X_key(t_FdF *fdf_data);
+void	update_Y_key(t_FdF *fdf_data);
+void	update_Z_key(t_FdF *fdf_data);
+void	update_A_key(t_FdF *fdf_data);
+void	update_B_key(t_FdF *fdf_data);
+void	update_C_key(t_FdF *fdf_data);
 void	update_end_program(t_FdF *fdf_data);
 void	update_up_arrow_key(t_FdF *fdf_data);
 void	update_down_arrow_key(t_FdF *fdf_data);

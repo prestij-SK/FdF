@@ -93,15 +93,12 @@ void    draw_landscape_horizontal_lines(t_Landscape *land_data, t_Image *land_ta
     while (i < land_data->size.y)
     {
         j = 0;
-        landscape_set_coord(land_data, &start, j, i);
         while (j < land_data->size.x - 1)
         {
-            
+            landscape_set_coord(land_data, &start, j, i);
             landscape_set_coord(land_data, &end, j + 1, i);
-            if (!draw_line_Bresenham(land_table, start, end))
-                // break ;
-            start.x = end.x;
-            start.y = end.y;
+            draw_line_Bresenham(land_table, start, end);
+                // break ; this would optimize, but it will draw wrong when you get to edge x < 0 or y < 0
             ++j;
         }
         ++i;
@@ -121,14 +118,12 @@ void    draw_landscape_vertical_lines(t_Landscape *land_data, t_Image *land_tabl
     while (i < land_data->size.x)
     {
         j = 0;
-        landscape_set_coord(land_data, &start, i, j);
         while (j < land_data->size.y - 1)
         {
+            landscape_set_coord(land_data, &start, i, j);
             landscape_set_coord(land_data, &end, i, j + 1);
-            if (!draw_line_Bresenham(land_table, start, end))
-                // break ;
-            start.x = end.x;
-            start.y = end.y;
+            draw_line_Bresenham(land_table, start, end);
+                // break ; this would optimize, but it will draw wrong when you get to edge x < 0 or y < 0
             ++j;
         }
         ++i;
