@@ -31,6 +31,51 @@ void	update_buttons_hover(t_FdF *fdf_data, int x, int y)
 	}
 }
 
+void	update_mouse_scroll_up(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return ;
+	fdf_data->land_data->setup.zoom += COORD_PIXEL_ZOOM_RANGE;
+}
+
+void	update_mouse_scroll_down(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return ;
+	if (!can_zoom_out(fdf_data->land_data))
+		return ;
+	fdf_data->land_data->setup.zoom -= COORD_PIXEL_ZOOM_RANGE;
+}
+
+void	update_left_arrow_key(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return ;
+	fdf_data->land_data->setup.move.x -= COORD_PIXEL_MOVE_RANGE;
+}
+
+void	update_right_arrow_key(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return ;
+	fdf_data->land_data->setup.move.x += COORD_PIXEL_MOVE_RANGE;	
+}
+
+void	update_up_arrow_key(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return ;
+	fdf_data->land_data->setup.move.y -= COORD_PIXEL_MOVE_RANGE;
+}
+
+void	update_down_arrow_key(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return ;
+	fdf_data->land_data->setup.move.y += COORD_PIXEL_MOVE_RANGE;
+}
+
+
 // We don't need x and y, as fdf_data will have hover button's active index
 void	update_mouse_left_click(t_FdF *fdf_data)
 {
@@ -46,26 +91,23 @@ void	update_mouse_left_click(t_FdF *fdf_data)
 	else if (!ft_strncmp(temp_str, "Conic", 5))
 		printf("Con\n");
 	else if (!ft_strncmp(temp_str, "Spin Left", 9))
-	{
-		// rotate_landscape(fdf_data->land_data, COORD_ANGLE);
-		// render_land_table(fdf_data);
-	}
+		printf("SpinL\n");
 	else if (!ft_strncmp(temp_str, "Spin Right", 10))
 		printf("SpinR\n");
 	else if (!ft_strncmp(temp_str, "Zoom In", 7))
-		printf("Zin\n");
+		update_mouse_scroll_up(fdf_data);
 	else if (!ft_strncmp(temp_str, "Zoom Out", 8))
-		printf("Zout\n");
+		update_mouse_scroll_down(fdf_data);
 	else if (!ft_strncmp(temp_str, "Move Left", 9))
-		printf("ML\n");
+		update_left_arrow_key(fdf_data);
 	else if (!ft_strncmp(temp_str, "Move Right", 10))
-		printf("MR\n");
+		update_right_arrow_key(fdf_data);
 	else if (!ft_strncmp(temp_str, "Move Up", 7))
-		printf("MU\n");
+		update_up_arrow_key(fdf_data);
 	else if (!ft_strncmp(temp_str, "Move Down", 9))
-		printf("MD\n");
+		update_down_arrow_key(fdf_data);
 	else if (!ft_strncmp(temp_str, "Reset", 5))
-		printf("Res\n");
+		landscape_set_default(fdf_data->land_data, fdf_data->land_table->size.x, fdf_data->land_table->size.y);
 	else if (!ft_strncmp(temp_str, "Exit", 4))
 		update_end_program(fdf_data);
 }

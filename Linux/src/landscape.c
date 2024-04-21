@@ -75,35 +75,6 @@ int	assign_file_to_landscape(t_Landscape *land_data, t_FileData *file_data)
 	return (1);
 }
 
-// void	set_landscape_default(t_Landscape *land_data)
-// {
-// 	int	x_new;
-// 	int	y_new;
-// 	int	i;
-// 	int	j;
-
-// 	if (!land_data)
-// 		return ;
-// 	x_new = COORD_X_START;
-// 	y_new = COORD_Y_START;
-// 	i = 0;
-// 	while (i < land_data->size.y)
-// 	{
-// 		j = 0;
-// 		while (j < land_data->size.x)
-// 		{
-// 			land_data->map[i][j].x = x_new;
-// 			land_data->map[i][j].y = y_new;
-// 			x_new += COORD_X_GAP;
-// 			++j;
-// 		}
-// 		x_new = COORD_X_START;
-// 		y_new += COORD_Y_GAP;
-// 		++i;
-// 	}
-// 	// rotate_landscape(land_data, COORD_ANGLE);
-// }
-
 t_Landscape	*create_landscape_data(t_FileData *file_data)
 {
 	t_Landscape	*new_land_data;

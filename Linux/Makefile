@@ -24,6 +24,7 @@ SRCS_NAME = draw_shape.c \
 			libft_funcs.c \
 			main.c \
 			render.c \
+			update_utils.c \
 			update.c \
 			utils.c \
 			validation.c \

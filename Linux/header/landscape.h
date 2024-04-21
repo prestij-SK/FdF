@@ -22,19 +22,6 @@
 # define COORD_LINE_COLOR 0x00FF00
 # define COORD_VERTEX_COLOR 0xFF0000
 
-typedef struct LandscapeInputInfo
-{
-	int	is_moved_left;
-	int	is_moved_right;
-	int	is_moved_up;
-	int	is_moved_down;
-	int	is_zoomed_in;
-	int	is_zoomed_out;
-	int	x_rotated;
-	int	y_rotated;
-	int	z_rotated;
-}	t_LandInput;
-
 typedef struct LandscapeSetup
 {
 	t_Point2D	gap;
@@ -42,8 +29,8 @@ typedef struct LandscapeSetup
 	t_Point2D	end;
 	t_Point2D	center;
 	t_Point3D_d	angles; // x, y, z current angles in radians
+	t_Point2D	move;
 	double		rotate_angle; // in radians
-	int			move;
 	int			zoom;
 	int			color; // line colors
 	int			vertex_color; // line colors for z != 0
@@ -55,7 +42,6 @@ typedef struct LandscapeData
 	int			**map; // z values
 	t_Point2D	size; // matrix width(x) and height(y)
 	t_LandSetup	setup; // valus of moving/zooming/rotating
-	t_LandInput	input; // input checks for updating
 }	t_Landscape;
 
 /*

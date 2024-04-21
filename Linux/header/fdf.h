@@ -14,7 +14,7 @@
 // HOOK EVENT
 # define EVENT_KEYDOWN 2 // pressed
 # define EVENT_KEYUP 3 // released
-// # define EVENT_MOUSEDOWN 4 // not used
+# define EVENT_MOUSEDOWN 4 // not used
 // # define EVENT_MOUSEUP 5 // not used
 # define EVENT_MOUSEMOVE 6
 // # define EVENT_EXPOSE 12 // not used
@@ -22,9 +22,15 @@
 
 // KEY CODES
 # define KEY_ESC 65307
+# define KEY_LEFT_ARROW 65361
+# define KEY_RIGHT_ARROW 65363
+# define KEY_UP_ARROW 65362
+# define KEY_DOWN_ARROW 65364
 
 // MOUSE CODES
 # define LEFT_CLICK 1
+# define SCROLL_UP 4
+# define SCROLL_DOWN 5
 
 typedef struct FdFData
 {
@@ -67,12 +73,31 @@ int	input_mouse_button(int button, int x, int y, t_FdF *fdf_data);
 	update.c functions
 
 	* update_end_program - deletes all allocated fields of 'fdf_data' and ends the program.
+	* update_up_arrow_key - operation for UP arrow key (move up).
+	* update_down_arrow_key - operation for DOWN arrow key (move down).
+	* update_left_arrow_key - operation for LEFT arrow key (move left).
+	* update_right_arrow_key - operation for RIGHT arrow key (move right).
+	* update_mouse_scroll_up - operation for mouse scroll up (which is zoom in).
 	* update_mouse_left_click - checks all buttons and does operation on landscape image.
+	* update_mouse_scroll_down - operation for mouse scroll down (which is zoom out).
 	* update_buttons_hover - checks all buttons and changes the color of the button on which mouse hovers. 
 */
 void	update_end_program(t_FdF *fdf_data);
+void	update_up_arrow_key(t_FdF *fdf_data);
+void	update_down_arrow_key(t_FdF *fdf_data);
+void	update_left_arrow_key(t_FdF *fdf_data);
+void	update_right_arrow_key(t_FdF *fdf_data);
+void	update_mouse_scroll_up(t_FdF *fdf_data);
 void	update_mouse_left_click(t_FdF *fdf_data);
+void	update_mouse_scroll_down(t_FdF *fdf_data);
 void	update_buttons_hover(t_FdF *fdf_data, int x, int y);
+
+/*
+	update_utils.c functions
+
+	* can_zoom_out - check if limit for zooming out is reached.
+*/
+int	can_zoom_out(t_Landscape *land_data);
 
 /*
 	render.c functions

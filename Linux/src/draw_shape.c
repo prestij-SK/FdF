@@ -99,7 +99,7 @@ void    draw_landscape_horizontal_lines(t_Landscape *land_data, t_Image *land_ta
             
             landscape_set_coord(land_data, &end, j + 1, i);
             if (!draw_line_Bresenham(land_table, start, end))
-                break ;
+                // break ;
             start.x = end.x;
             start.y = end.y;
             ++j;
@@ -126,7 +126,7 @@ void    draw_landscape_vertical_lines(t_Landscape *land_data, t_Image *land_tabl
         {
             landscape_set_coord(land_data, &end, i, j + 1);
             if (!draw_line_Bresenham(land_table, start, end))
-                break ;
+                // break ;
             start.x = end.x;
             start.y = end.y;
             ++j;

@@ -52,12 +52,23 @@ int	fdf_data_init(t_FdF *fdf_data, t_FileData *file_data)
 	return (1);
 }
 
+static int	update_frame(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return (0);
+	render_land_table(fdf_data);
+	return (1);
+}
+
 static void	input_update_render(t_FdF *fdf_data)
 {
+	if (!fdf_data)
+		return ;
 	mlx_hook(fdf_data->mlx_window, EVENT_MOUSEMOVE, 1L<<6, input_mouse_move, fdf_data);
 	mlx_mouse_hook(fdf_data->mlx_window, input_mouse_button, fdf_data);
 	mlx_hook(fdf_data->mlx_window, EVENT_KEYDOWN, 1L<<0, input_key_press, fdf_data);
 	mlx_hook(fdf_data->mlx_window, EVENT_DESTROY, 0, input_close_window, fdf_data);
+	mlx_loop_hook(fdf_data->mlx, update_frame, fdf_data);
 }
 
 int		start_program(t_FdF *fdf_data)
@@ -65,7 +76,7 @@ int		start_program(t_FdF *fdf_data)
 	if (!fdf_data)
 		return (0);
 	render_all(fdf_data);
-	// input_update_render(fdf_data);
+	input_update_render(fdf_data);
 	mlx_loop(fdf_data->mlx);
 	return (1);
 }
