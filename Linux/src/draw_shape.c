@@ -29,7 +29,7 @@ void    draw_rectangle_filled(t_Image *img)
     }
 }
 
-int draw_line_Bresenham(t_Image *img, t_Point2D start, t_Point2D end)
+int draw_line_Bresenham(t_Image *img, t_Point2D start, t_Point2D end, int z_val)
 {
     t_BresenhamUtils    util;
 
@@ -57,14 +57,19 @@ int draw_line_Bresenham(t_Image *img, t_Point2D start, t_Point2D end)
     util.temp.x = start.x; // Initialize current x coordinate
     util.temp.y = start.y; // Initialize current y coordinate
 
+    int color;
+    if (z_val != 0)
+        color = LINE_COLOR;
+    else
+        color = 0xFF0000;
     // Iterate over each point along the line
     while (util.temp.x != end.x)
     {
         // Plot the point, taking into account whether the line is steep or not
         if (util.steep && in_range(util.temp.y, util.temp.x, img->size.x, img->size.y))
-            alt_mlx_pixel_put(img, util.temp.y, util.temp.x, LINE_COLOR);
+            alt_mlx_pixel_put(img, util.temp.y, util.temp.x, color);
         else if (!util.steep && in_range(util.temp.x, util.temp.y, img->size.x, img->size.y))
-            alt_mlx_pixel_put(img, util.temp.x, util.temp.y, LINE_COLOR);
+            alt_mlx_pixel_put(img, util.temp.x, util.temp.y, color);
         else
             return (0); // this will quit the function if the coordinates are not in image's range
         util.temp.x += util.step.x; // Move to the next x coordinate
@@ -97,7 +102,14 @@ void    draw_landscape_horizontal_lines(t_Landscape *land_data, t_Image *land_ta
         {
             landscape_set_coord(land_data, &start, j, i);
             landscape_set_coord(land_data, &end, j + 1, i);
-            draw_line_Bresenham(land_table, start, end);
+            if (land_data->map[i][j] != 0)
+                start.y -= (land_data->map[i][j] + 20);
+            if (land_data->map[i][j + 1] != 0)
+                end.y -= (land_data->map[i][j + 1] + 20);
+            if (land_data->map[i][j] != 0 || land_data->map[i][j + 1] != 0)
+                draw_line_Bresenham(land_table, start, end, 1);
+            else
+                draw_line_Bresenham(land_table, start, end, 0);
                 // break ; this would optimize, but it will draw wrong when you get to edge x < 0 or y < 0
             ++j;
         }
@@ -122,7 +134,18 @@ void    draw_landscape_vertical_lines(t_Landscape *land_data, t_Image *land_tabl
         {
             landscape_set_coord(land_data, &start, i, j);
             landscape_set_coord(land_data, &end, i, j + 1);
-            draw_line_Bresenham(land_table, start, end);
+            if (land_data->map[j][i] != 0)
+            {
+                start.y -= (land_data->map[j][i] + 20);
+            }
+            if (land_data->map[j + 1][i] != 0)
+            {
+                end.y -= (land_data->map[j + 1][i] + 20);
+            }
+            if (land_data->map[j][i] != 0 || land_data->map[j + 1][i] != 0)
+                draw_line_Bresenham(land_table, start, end, 1);
+            else
+                draw_line_Bresenham(land_table, start, end, 0);
                 // break ; this would optimize, but it will draw wrong when you get to edge x < 0 or y < 0
             ++j;
         }

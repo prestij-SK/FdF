@@ -78,6 +78,18 @@ int		start_program(t_FdF *fdf_data)
 	render_all(fdf_data);
 	input_update_render(fdf_data);
 	mlx_loop(fdf_data->mlx);
+	// int i = 0;
+	// while (i < fdf_data->land_data->size.y)
+	// {
+	// 	int j = 0;
+	// 	while (j < fdf_data->land_data->size.x)
+	// 	{
+	// 		printf("%d ", fdf_data->land_data->map[i][j]);
+	// 		++j;
+	// 	}
+	// 	printf("\n");
+	// 	++i;
+	// }
 	return (1);
 }
 

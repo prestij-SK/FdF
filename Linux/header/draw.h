@@ -32,8 +32,8 @@ typedef struct BresenhamUtils
 void	draw_rectangle_filled(t_Image *img);
 void	alt_mlx_pixel_put(t_Image *img, int x, int y, int color);
 void    draw_landscape(t_Landscape *land_data, t_Image *land_table);
-int		draw_line_Bresenham(t_Image *img, t_Point2D start, t_Point2D end);
 void    draw_landscape_vertical_lines(t_Landscape *land_data, t_Image *land_table);
+int		draw_line_Bresenham(t_Image *img, t_Point2D start, t_Point2D end, int z_val);
 void    draw_landscape_horizontal_lines(t_Landscape *land_data, t_Image *land_table);
 
 /*
