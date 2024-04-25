@@ -8,7 +8,8 @@ SRCS_DIR = src/
 OBJS_DIR = obj/
 HEADERS_DIR = header/
 
-SRCS_NAME = draw_shape.c \
+SRCS_NAME = color.c \
+			draw_shape.c \
 			draw_utils.c \
 			error_handling.c \
 			fdf_start.c \
@@ -29,7 +30,8 @@ SRCS_NAME = draw_shape.c \
 			utils.c \
 			validation.c \
 
-HEADERS = draw.h \
+HEADERS = color.h \
+		  draw.h \
 		  fdf.h \
 		  file_control.h \
 		  for_math.h \

@@ -60,8 +60,8 @@ int	main(int argc, char **argv)
 //     int x2 = 450, y2 = 450;
 
 //     // Define start and end colors (RGB values)
-//     Color startColor = {255, 0, 0}; // Red
-//     Color endColor = {0, 0, 255};   // Blue
+//     Color startColor = {105, 212, 73}; // 0x69D449
+//     Color endColor = {102, 51, 0}; // 0x663300
 
 //     // Draw line with gradient
 //     drawLineWithGradient(mlx_ptr, win_ptr, x1, y1, x2, y2, startColor, endColor);

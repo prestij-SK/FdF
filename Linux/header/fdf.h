@@ -7,6 +7,7 @@
 # include "images.h"
 # include "draw.h"
 # include "for_math.h"
+# include "color.h"
 
 // WINDOW
 # define WINDOW_WIDTH 1920

@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"color.h": "c",
+		"utils.h": "c",
+		"file_control.h": "c",
+		"random": "c"
+	}
+}
