@@ -1,5 +1,4 @@
 #include "../header/fdf.h"
-#include "../header/for_math.h"
 
 void	update_end_program(t_FdF *fdf_data)
 {
@@ -89,23 +88,8 @@ void	update_X_key(t_FdF *fdf_data)
 {
 	if (!fdf_data)
 		return ;
-	fdf_data->land_data->setup.angles.x += get_radians(COORD_ROTATE_ANGLE);
-}
-
-// Rotation Y axis to right
-void	update_Y_key(t_FdF *fdf_data)
-{
-	if (!fdf_data)
-		return ;
-	fdf_data->land_data->setup.angles.y += get_radians(COORD_ROTATE_ANGLE);
-}
-
-// Rotation Z axis to right
-void	update_Z_key(t_FdF *fdf_data)
-{
-	if (!fdf_data)
-		return ;
-	fdf_data->land_data->setup.angles.z += get_radians(COORD_ROTATE_ANGLE);
+	fdf_data->land_data->setup.angles.x += COORD_ROTATE_ANGLE;
+	rotation_flip(fdf_data->land_data);
 }
 
 // Rotation X axis to left
@@ -113,23 +97,42 @@ void	update_A_key(t_FdF *fdf_data)
 {
 	if (!fdf_data)
 		return ;
-	fdf_data->land_data->setup.angles.x -= get_radians(COORD_ROTATE_ANGLE);
+	fdf_data->land_data->setup.angles.x -= COORD_ROTATE_ANGLE;
+	rotation_flip(fdf_data->land_data);
+}
+
+// Rotation Y axis to right
+void	update_Y_key(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return ;
+	fdf_data->land_data->setup.angles.y += COORD_ROTATE_ANGLE;
+	rotation_flip(fdf_data->land_data);
 }
 
 // Rotation Y axis to left
-void	update_B_key(t_FdF *fdf_data)
+void	update_S_key(t_FdF *fdf_data)
 {
 	if (!fdf_data)
 		return ;
-	fdf_data->land_data->setup.angles.y -= get_radians(COORD_ROTATE_ANGLE);
+	fdf_data->land_data->setup.angles.y -= COORD_ROTATE_ANGLE;
+	rotation_flip(fdf_data->land_data);
 }
 
 // Rotation Z axis to left
-void	update_C_key(t_FdF *fdf_data)
+void	update_D_key(t_FdF *fdf_data)
 {
 	if (!fdf_data)
 		return ;
-	fdf_data->land_data->setup.angles.z -= get_radians(COORD_ROTATE_ANGLE);
+	fdf_data->land_data->setup.angles.z -= COORD_ROTATE_ANGLE;
+}
+
+// Rotation Z axis to right
+void	update_Z_key(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return ;
+	fdf_data->land_data->setup.angles.z += COORD_ROTATE_ANGLE;
 }
 
 // We don't need x and y, as fdf_data will have hover button's active index
@@ -166,4 +169,14 @@ void	update_mouse_left_click(t_FdF *fdf_data)
 		landscape_set_default(fdf_data->land_data, fdf_data->land_table->size.x, fdf_data->land_table->size.y);
 	else if (!ft_strncmp(temp_str, "Exit", 4))
 		update_end_program(fdf_data);
+}
+
+int	update_frame(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return (0);
+	render_land_table(fdf_data);
+	// printf("x_angle: %d   %d\n", fdf_data->land_data->setup.angles.x, fdf_data->land_data->z_val_flip);
+	// printf("y_angle: %d   %d\n", fdf_data->land_data->setup.angles.y, fdf_data->land_data->z_val_flip);
+	return (1);
 }

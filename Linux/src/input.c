@@ -31,10 +31,10 @@ int	input_key_press(int key, t_FdF *fdf_data)
 		update_Z_key(fdf_data);
 	else if (key == KEY_A)
 		update_A_key(fdf_data);
-	else if (key == KEY_B)
-		update_B_key(fdf_data);
-	else if (key == KEY_C)
-		update_C_key(fdf_data);
+	else if (key == KEY_S)
+		update_S_key(fdf_data);
+	else if (key == KEY_D)
+		update_D_key(fdf_data);
 	return (1);
 }
 

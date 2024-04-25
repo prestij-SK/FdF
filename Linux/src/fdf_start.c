@@ -52,14 +52,6 @@ int	fdf_data_init(t_FdF *fdf_data, t_FileData *file_data)
 	return (1);
 }
 
-static int	update_frame(t_FdF *fdf_data)
-{
-	if (!fdf_data)
-		return (0);
-	render_land_table(fdf_data);
-	return (1);
-}
-
 static void	input_update_render(t_FdF *fdf_data)
 {
 	if (!fdf_data)
@@ -71,25 +63,13 @@ static void	input_update_render(t_FdF *fdf_data)
 	mlx_loop_hook(fdf_data->mlx, update_frame, fdf_data);
 }
 
-int		start_program(t_FdF *fdf_data)
+int	start_program(t_FdF *fdf_data)
 {
 	if (!fdf_data)
 		return (0);
 	render_all(fdf_data);
 	input_update_render(fdf_data);
 	mlx_loop(fdf_data->mlx);
-	// int i = 0;
-	// while (i < fdf_data->land_data->size.y)
-	// {
-	// 	int j = 0;
-	// 	while (j < fdf_data->land_data->size.x)
-	// 	{
-	// 		printf("%d ", fdf_data->land_data->map[i][j]);
-	// 		++j;
-	// 	}
-	// 	printf("\n");
-	// 	++i;
-	// }
 	return (1);
 }
 

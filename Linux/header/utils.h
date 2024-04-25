@@ -14,11 +14,6 @@
 # define MAX_INT 2147483647
 # define MIN_INT -2147483648
 
-// CONSTANTS
-# ifndef M_PI
-#  define M_PI 3.14159265358979323846
-# endif
-
 typedef struct Point2D_int
 {
 	int	x;
@@ -31,19 +26,6 @@ typedef struct Point3D_int
 	int	y;
 	int	z;
 }	t_Point3D;
-
-typedef struct Point2D_double
-{
-	double	x;
-	double	y;
-}	t_Point2D_d;
-
-typedef struct Point3D_double
-{
-	double	x;
-	double	y;
-	double	z;
-}	t_Point3D_d;
 
 /*
 	utils.c functions

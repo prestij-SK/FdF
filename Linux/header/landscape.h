@@ -13,12 +13,13 @@
 # define COORD_Y_GAP_MID 20
 # define COORD_X_GAP_BIG 40
 # define COORD_Y_GAP_BIG 40
-# define COORD_X_ANGLE 60
+# define COORD_X_ANGLE 0
 # define COORD_Y_ANGLE 0
-# define COORD_Z_ANGLE 45
+# define COORD_Z_ANGLE 0
 # define COORD_ROTATE_ANGLE 5
 # define COORD_PIXEL_MOVE_RANGE 7
 # define COORD_PIXEL_ZOOM_RANGE 3
+# define COORD_Z_VALUE_MULTIPLIER 5
 # define COORD_LINE_COLOR 0x00FF00
 # define COORD_VERTEX_COLOR 0xFF0000
 
@@ -28,8 +29,8 @@ typedef struct LandscapeSetup
 	t_Point2D	start;
 	t_Point2D	end;
 	t_Point2D	center;
-	t_Point3D_d	angles; // x, y, z current angles in radians
 	t_Point2D	move;
+	t_Point3D	angles;
 	int			zoom;
 	int			color; // line colors
 	int			vertex_color; // line colors for z != 0
@@ -41,6 +42,7 @@ typedef struct LandscapeData
 	int			**map; // z values
 	t_Point2D	size; // matrix width(x) and height(y)
 	t_LandSetup	setup; // valus of moving/zooming/rotating
+	int			z_val_flip; // this will help to draw correctly when X or Y axis did 180 degree rotation, changing all z values to their negatives
 }	t_Landscape;
 
 /*

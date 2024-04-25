@@ -6,6 +6,7 @@
 # include "../mlx_linux/mlx.h"
 # include "images.h"
 # include "draw.h"
+# include "for_math.h"
 
 // WINDOW
 # define WINDOW_WIDTH 1920
@@ -14,7 +15,7 @@
 // HOOK EVENT
 # define EVENT_KEYDOWN 2 // pressed
 # define EVENT_KEYUP 3 // released
-# define EVENT_MOUSEDOWN 4 // not used
+// # define EVENT_MOUSEDOWN 4 // not used
 // # define EVENT_MOUSEUP 5 // not used
 # define EVENT_MOUSEMOVE 6
 // # define EVENT_EXPOSE 12 // not used
@@ -30,8 +31,8 @@
 # define KEY_Y 121
 # define KEY_Z 122
 # define KEY_A 97
-# define KEY_B 98
-# define KEY_C 99
+# define KEY_S 115
+# define KEY_D 100
 
 // MOUSE CODES
 # define LEFT_CLICK 1
@@ -78,7 +79,7 @@ int	input_mouse_button(int button, int x, int y, t_FdF *fdf_data);
 /*
 	update.c functions
 
-	* update_XYZABC_key - these functions are for rotating for X,Y,Z axis. The ABC do the same but rotation to opposite side (to left).
+	* update_XYZASD_key - these functions are for rotating for X,Y,Z axis. The ASD do the same but rotation to opposite side (to left).
 	* update_end_program - deletes all allocated fields of 'fdf_data' and ends the program.
 	* update_up_arrow_key - operation for UP arrow key (move up).
 	* update_down_arrow_key - operation for DOWN arrow key (move down).
@@ -89,12 +90,13 @@ int	input_mouse_button(int button, int x, int y, t_FdF *fdf_data);
 	* update_mouse_scroll_down - operation for mouse scroll down (which is zoom out).
 	* update_buttons_hover - checks all buttons and changes the color of the button on which mouse hovers. 
 */
+int		update_frame(t_FdF *fdf_data);
 void	update_X_key(t_FdF *fdf_data);
 void	update_Y_key(t_FdF *fdf_data);
 void	update_Z_key(t_FdF *fdf_data);
 void	update_A_key(t_FdF *fdf_data);
-void	update_B_key(t_FdF *fdf_data);
-void	update_C_key(t_FdF *fdf_data);
+void	update_S_key(t_FdF *fdf_data);
+void	update_D_key(t_FdF *fdf_data);
 void	update_end_program(t_FdF *fdf_data);
 void	update_up_arrow_key(t_FdF *fdf_data);
 void	update_down_arrow_key(t_FdF *fdf_data);
@@ -109,8 +111,10 @@ void	update_buttons_hover(t_FdF *fdf_data, int x, int y);
 	update_utils.c functions
 
 	* can_zoom_out - check if limit for zooming out is reached.
+	* rotation_flip - this will flip z_values if rotation is in such coordinates quadrants that drawing would be different.
 */
-int	can_zoom_out(t_Landscape *land_data);
+int		can_zoom_out(t_Landscape *land_data);
+void	rotation_flip(t_Landscape *land_data);
 
 /*
 	render.c functions

@@ -11,6 +11,79 @@ int	main(int argc, char **argv)
 }
 
 
+// // Define RGB color struct
+// typedef struct {
+//     int r, g, b;
+// } Color;
+
+// // Function to perform linear interpolation between two colors
+// Color lerpColor(Color start, Color end, float t) {
+//     Color result;
+//     result.r = start.r + t * (end.r - start.r);
+//     result.g = start.g + t * (end.g - start.g);
+//     result.b = start.b + t * (end.b - start.b);
+//     return result;
+// }
+
+// // Function to draw a line with interpolated colors
+// void drawLineWithGradient(void *mlx_ptr, void *win_ptr, int x1, int y1, int x2, int y2, Color startColor, Color endColor) {
+//     int dx = abs(x2 - x1);
+//     int dy = abs(y2 - y1);
+//     int steps = dx > dy ? dx : dy;
+//     float xIncrement = (float)(x2 - x1) / steps;
+//     float yIncrement = (float)(y2 - y1) / steps;
+
+//     float x = x1;
+//     float y = y1;
+//     Color currentColor;
+
+//     for (int i = 0; i <= steps; i++) {
+//         float t = (float)i / steps;
+//         currentColor = lerpColor(startColor, endColor, t);
+//         // Draw pixel at (x, y) with color currentColor
+//         mlx_pixel_put(mlx_ptr, win_ptr, (int)x, (int)y, (currentColor.r << 16) | (currentColor.g << 8) | currentColor.b);
+//         x += xIncrement;
+//         y += yIncrement;
+//     }
+// }
+
+// int main() {
+//     void *mlx_ptr;
+//     void *win_ptr;
+
+//     // Initialize minilibx
+//     mlx_ptr = mlx_init();
+//     win_ptr = mlx_new_window(mlx_ptr, 500, 500, "Gradient Line");
+
+//     // Define start and end points
+//     int x1 = 50, y1 = 50;
+//     int x2 = 450, y2 = 450;
+
+//     // Define start and end colors (RGB values)
+//     Color startColor = {255, 0, 0}; // Red
+//     Color endColor = {0, 0, 255};   // Blue
+
+//     // Draw line with gradient
+//     drawLineWithGradient(mlx_ptr, win_ptr, x1, y1, x2, y2, startColor, endColor);
+
+//     // Display the window
+//     mlx_loop(mlx_ptr);
+
+//     return 0;
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
 // # include "../mlx_linux/mlx.h"
 // #include <stdlib.h>
 

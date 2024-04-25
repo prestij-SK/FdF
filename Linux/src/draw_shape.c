@@ -103,9 +103,27 @@ void    draw_landscape_horizontal_lines(t_Landscape *land_data, t_Image *land_ta
             landscape_set_coord(land_data, &start, j, i);
             landscape_set_coord(land_data, &end, j + 1, i);
             if (land_data->map[i][j] != 0)
-                start.y -= (land_data->map[i][j] + 20);
+            {
+                if (land_data->z_val_flip)
+                {
+                    start.y += (land_data->map[i][j]) * COORD_Z_VALUE_MULTIPLIER;
+                }
+                else
+                {
+                    start.y -= (land_data->map[i][j]) * COORD_Z_VALUE_MULTIPLIER;
+                }
+            }
             if (land_data->map[i][j + 1] != 0)
-                end.y -= (land_data->map[i][j + 1] + 20);
+            {
+                if (land_data->z_val_flip)
+                {
+                    end.y += (land_data->map[i][j + 1]) * COORD_Z_VALUE_MULTIPLIER;
+                }
+                else
+                {
+                    end.y -= (land_data->map[i][j + 1]) * COORD_Z_VALUE_MULTIPLIER;
+                }
+            }
             if (land_data->map[i][j] != 0 || land_data->map[i][j + 1] != 0)
                 draw_line_Bresenham(land_table, start, end, 1);
             else
@@ -136,11 +154,25 @@ void    draw_landscape_vertical_lines(t_Landscape *land_data, t_Image *land_tabl
             landscape_set_coord(land_data, &end, i, j + 1);
             if (land_data->map[j][i] != 0)
             {
-                start.y -= (land_data->map[j][i] + 20);
+                if (land_data->z_val_flip)
+                {
+                    start.y += (land_data->map[j][i]) * COORD_Z_VALUE_MULTIPLIER;
+                }
+                else
+                {
+                    start.y -= (land_data->map[j][i]) * COORD_Z_VALUE_MULTIPLIER;
+                }
             }
             if (land_data->map[j + 1][i] != 0)
             {
-                end.y -= (land_data->map[j + 1][i] + 20);
+                if (land_data->z_val_flip)
+                {
+                    end.y += (land_data->map[j + 1][i]) * COORD_Z_VALUE_MULTIPLIER;
+                }
+                else
+                {
+                    end.y -= (land_data->map[j + 1][i]) * COORD_Z_VALUE_MULTIPLIER;
+                }
             }
             if (land_data->map[j][i] != 0 || land_data->map[j + 1][i] != 0)
                 draw_line_Bresenham(land_table, start, end, 1);

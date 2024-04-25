@@ -42,9 +42,9 @@ static void	landscape_angles_default(t_Landscape *land_data)
 {
 	if (!land_data)
 		return ;
-	land_data->setup.angles.x = get_radians(COORD_X_ANGLE);
-	land_data->setup.angles.y = get_radians(COORD_Y_ANGLE);
-	land_data->setup.angles.z = get_radians(COORD_Z_ANGLE);
+	land_data->setup.angles.x = COORD_X_ANGLE;
+	land_data->setup.angles.y = COORD_Y_ANGLE;
+	land_data->setup.angles.z = COORD_Z_ANGLE;
 }
 
 static void landscape_other_setups(t_Landscape *land_data)
@@ -54,6 +54,7 @@ static void landscape_other_setups(t_Landscape *land_data)
 	land_data->setup.move.x = 0;
 	land_data->setup.move.y = 0;
 	land_data->setup.zoom = 0;
+	land_data->z_val_flip = 0;
 }
 
 void	landscape_set_default(t_Landscape *land_data, int table_x, int table_y)
@@ -84,13 +85,6 @@ static void	coord_move(t_Landscape *land_data, t_Point2D *coord)
 	coord->y += land_data->setup.move.y;
 }
 
-static void	coord_z_rotate(t_Landscape *land_data, t_Point2D *coord)
-{
-	if (!land_data || !coord)
-		return ;
-	rotate_Z(coord, land_data->setup.angles.z, land_data->setup.center, 0);
-}
-
 static void	coord_center(t_Landscape *land_data, t_Point2D *new_center)
 {
 	if (!land_data || !new_center)
@@ -109,13 +103,9 @@ void	landscape_set_coord(t_Landscape *land_data, t_Point2D *coord, int index_x, 
 	coord_zoom(land_data, &new_gap);
 	coord->x = (index_x * new_gap.x) + land_data->setup.start.x;
 	coord->y = (index_y * new_gap.y) + land_data->setup.start.y;
-	// printf("coord[%d][%d]: %d_%d", index_x, index_y, coord->x, coord->y);
 	coord_center(land_data, &new_center);
-	rotate_Z(coord, land_data->setup.angles.z, new_center, 0);
-	rotate_Y(coord, land_data->setup.angles.y, new_center, 0);
-	rotate_X(coord, land_data->setup.angles.x, new_center, 0);
+	rotate_Z(coord, land_data->setup.angles.z, new_center);
+	rotate_Y(coord, land_data->setup.angles.y, new_center);
+	rotate_X(coord, land_data->setup.angles.x, new_center);
 	coord_move(land_data, coord);
-	// printf("	rotate: %d_%d\n", coord->x, coord->y);
-	// y rotate
-	// z rotate
 }
