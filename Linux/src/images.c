@@ -84,18 +84,24 @@ static void	set_buttons_name(t_Image **buttons)
 {
 	if (!buttons)
 		return ;
-	buttons[0]->name = "Parallel";
-	buttons[1]->name = "Conic";
-	buttons[2]->name = "Spin Left";
-	buttons[3]->name = "Spin Right";
+	buttons[0]->name = "Isometric";
+	buttons[1]->name = "X Rotate";
+	buttons[2]->name = "Y Rotate";
+	buttons[3]->name = "Z Rotate";
 	buttons[4]->name = "Zoom In";
-	buttons[5]->name = "Zoom Out";
-	buttons[6]->name = "Move Left";
-	buttons[7]->name = "Move Right";
-	buttons[8]->name = "Move Up";
-	buttons[9]->name = "Move Down";
-	buttons[10]->name = "Reset";
-	buttons[11]->name = "Exit";
+	buttons[5]->name = "Move Left";
+	buttons[6]->name = "Move Right";
+	buttons[7]->name = "Fiesta";
+	buttons[8]->name = "Reset";
+	buttons[9]->name = "Conic";
+	buttons[10]->name = "X Rotate*";
+	buttons[11]->name = "Y Rotate*";
+	buttons[12]->name = "Z Rotate*";
+	buttons[13]->name = "Zoom Out";
+	buttons[14]->name = "Move Up";
+	buttons[15]->name = "Move Down";
+	buttons[16]->name = "Do Nothing";
+	buttons[17]->name = "Exit";
 }
 
 static void	set_button_fields(t_Image *button, int x, int y)

@@ -56,6 +56,15 @@ static void landscape_other_setups(t_Landscape *land_data)
 	land_data->z_val_flip = 0;
 }
 
+static void	landscape_status_default(t_Landscape *land_data)
+{
+	if (!land_data)
+		return ;
+	land_data->status.is_conic = STATUS_IS_NOT_ACTIVE;
+	land_data->status.is_isometric = STATUS_IS_ACTIVE;
+	land_data->status.is_party_time = STATUS_IS_NOT_ACTIVE;
+}
+
 void	landscape_set_default(t_Landscape *land_data, int table_x, int table_y)
 {
 	if (!land_data)
@@ -64,4 +73,5 @@ void	landscape_set_default(t_Landscape *land_data, int table_x, int table_y)
 	landscape_coords_default(land_data);
 	landscape_angles_default(land_data);
 	landscape_other_setups(land_data);
+	landscape_status_default(land_data);
 }

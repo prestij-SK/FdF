@@ -49,6 +49,7 @@ typedef struct FdFData
 	t_Image			*option_table;
 	t_Image			**buttons;
 	int				active_button; // this will be used whenever mouse is on the button (-1 means something went wrong)
+	
 } 	t_FdF;
 
 /*
@@ -81,6 +82,9 @@ int	input_mouse_button(int button, int x, int y, t_FdF *fdf_data);
 	update.c functions
 
 	* update_XYZASD_key - these functions are for rotating for X,Y,Z axis. The ASD do the same but rotation to opposite side (to left).
+	* update_conic - shows landscape in conic projection.
+	* update_isometric - shows landscape in isometric projection.
+	* update_party_time - shows landscape but with random colors on diagonals when moving.
 	* update_end_program - deletes all allocated fields of 'fdf_data' and ends the program.
 	* update_up_arrow_key - operation for UP arrow key (move up).
 	* update_down_arrow_key - operation for DOWN arrow key (move down).
@@ -98,6 +102,9 @@ void	update_Z_key(t_FdF *fdf_data);
 void	update_A_key(t_FdF *fdf_data);
 void	update_S_key(t_FdF *fdf_data);
 void	update_D_key(t_FdF *fdf_data);
+void	update_conic(t_FdF *fdf_data);
+void	update_isometric(t_FdF *fdf_data);
+void	update_party_time(t_FdF *fdf_data);
 void	update_end_program(t_FdF *fdf_data);
 void	update_up_arrow_key(t_FdF *fdf_data);
 void	update_down_arrow_key(t_FdF *fdf_data);

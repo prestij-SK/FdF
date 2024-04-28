@@ -85,7 +85,7 @@ void	update_X_key(t_FdF *fdf_data)
 }
 
 // Rotation X opposite
-void	update_A_key(t_FdF *fdf_data)
+void	update_S_key(t_FdF *fdf_data)
 {
 	if (!fdf_data)
 		return ;
@@ -103,12 +103,11 @@ void	update_C_key(t_FdF *fdf_data)
 }
 
 // Rotation Y opposite
-void	update_S_key(t_FdF *fdf_data)
+void	update_D_key(t_FdF *fdf_data)
 {
 	if (!fdf_data)
 		return ;
 	fdf_data->land_data->setup.angles.y -= COORD_ROTATE_ANGLE;
-	rotation_flip(fdf_data->land_data);
 }
 
 // Rotation Z
@@ -120,13 +119,47 @@ void	update_Z_key(t_FdF *fdf_data)
 }
 
 // Rotation Z opposite
-void	update_D_key(t_FdF *fdf_data)
+void	update_A_key(t_FdF *fdf_data)
 {
 	if (!fdf_data)
 		return ;
 	fdf_data->land_data->setup.angles.z -= COORD_ROTATE_ANGLE;
+	rotation_flip(fdf_data->land_data);
 }
 
+// Random coloring diagonal lines
+void	update_party_time(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return ;
+	if (!fdf_data->land_data->status.is_party_time)
+	{
+		fdf_data->land_data->status.is_party_time = STATUS_IS_ACTIVE;
+		return ;
+	}
+	fdf_data->land_data->status.is_party_time = STATUS_IS_NOT_ACTIVE;
+}
+
+// Show landscape in isometric projection
+void	update_isometric(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return ;
+	fdf_data->land_data->status.is_isometric = STATUS_IS_ACTIVE;
+	fdf_data->land_data->status.is_conic = STATUS_IS_NOT_ACTIVE;
+}
+
+// Show landscape int conic projection
+void	update_conic(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return ;
+	fdf_data->land_data->status.is_conic = STATUS_IS_ACTIVE;
+	fdf_data->land_data->status.is_isometric = STATUS_IS_NOT_ACTIVE;
+	fdf_data->land_data->setup.angles.x = 0;
+	fdf_data->land_data->setup.angles.y = 0;
+	fdf_data->land_data->setup.angles.z = 0;
+}
 
 // We don't need x and y, as fdf_data will have hover button's active index
 void	update_mouse_left_click(t_FdF *fdf_data)
@@ -138,14 +171,22 @@ void	update_mouse_left_click(t_FdF *fdf_data)
 	if (fdf_data->active_button == BUTTONS_NOT_ACTIVE)
 		return ;
 	temp_str = fdf_data->buttons[fdf_data->active_button]->name;
-	if (!ft_strncmp(temp_str, "Parallel", 8))
-		printf("Paral\n");
+	if (!ft_strncmp(temp_str, "Isometric", 9))
+		update_isometric(fdf_data);
 	else if (!ft_strncmp(temp_str, "Conic", 5))
-		printf("Con\n");
-	else if (!ft_strncmp(temp_str, "Spin Left", 9))
-		printf("SpinL\n");
-	else if (!ft_strncmp(temp_str, "Spin Right", 10))
-		printf("SpinR\n");
+		update_conic(fdf_data);
+	else if (!ft_strncmp(temp_str, "X Rotate*", 9))
+		update_S_key(fdf_data);
+	else if (!ft_strncmp(temp_str, "Y Rotate*", 9))
+		update_D_key(fdf_data);
+	else if (!ft_strncmp(temp_str, "Z Rotate*", 9))
+		update_A_key(fdf_data);
+	else if (!ft_strncmp(temp_str, "X Rotate", 8))
+		update_X_key(fdf_data);
+	else if (!ft_strncmp(temp_str, "Y Rotate", 8))
+		update_C_key(fdf_data);
+	else if (!ft_strncmp(temp_str, "Z Rotate", 8))
+		update_Z_key(fdf_data);
 	else if (!ft_strncmp(temp_str, "Zoom In", 7))
 		update_mouse_scroll_up(fdf_data);
 	else if (!ft_strncmp(temp_str, "Zoom Out", 8))
@@ -158,6 +199,8 @@ void	update_mouse_left_click(t_FdF *fdf_data)
 		update_up_arrow_key(fdf_data);
 	else if (!ft_strncmp(temp_str, "Move Down", 9))
 		update_down_arrow_key(fdf_data);
+	else if (!ft_strncmp(temp_str, "Fiesta", 6))
+		update_party_time(fdf_data);
 	else if (!ft_strncmp(temp_str, "Reset", 5))
 		landscape_set_default(fdf_data->land_data, fdf_data->land_table->size.x, fdf_data->land_table->size.y);
 	else if (!ft_strncmp(temp_str, "Exit", 4))

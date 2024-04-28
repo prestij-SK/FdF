@@ -24,6 +24,7 @@ typedef struct BresenhamUtils
 	* alt_mlx_pixel_put - draws pixel on the 'img' by given (x, y) and color.
 	* draw_landscape - draws landscape on 'land_table' image.
 	* draw_line_Bresenham - draws a line on the 'img' from (x1, y1) to (x2, y2) with Bresenham Algorithm.
+	* draw_line_Bresenham_random_colors - does same line drawing but with random coloring on diagonals.
 	* draw_landscape_vertical_lines - draws vertical lines coordinates of 'land_data' to 'land_table' image.
 	* draw_landscape_horizontal_lines - draws horizontal lines coordinates of 'land_data' to 'land_table' image.
 */
@@ -31,6 +32,7 @@ void	draw_rectangle_filled(t_Image *img);
 void	alt_mlx_pixel_put(t_Image *img, int x, int y, int color);
 void    draw_landscape(t_Landscape *land_data, t_Image *land_table);
 int		draw_line_Bresenham(t_Image *img, t_Line2D *line);
+int		draw_line_Bresenham_random_colors(t_Image *img, t_Line2D *line);
 void    draw_landscape_vertical_lines(t_Landscape *land_data, t_Image *land_table);
 void    draw_landscape_horizontal_lines(t_Landscape *land_data, t_Image *land_table);
 

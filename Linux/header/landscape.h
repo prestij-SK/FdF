@@ -23,6 +23,17 @@
 # define COORD_PIXEL_ZOOM_LIMIT 0.2
 # define COORD_Z_VALUE_MULTIPLIER 4
 
+// STATUS CODES
+# define STATUS_IS_ACTIVE 1
+# define STATUS_IS_NOT_ACTIVE 0
+
+typedef struct LandscapeStatus
+{
+	int	is_isometric;
+	int	is_conic;
+	int	is_party_time;
+}	t_LandStatus;
+
 typedef struct LandscapeSetup
 {
 	t_Point2D	gap;
@@ -37,10 +48,11 @@ typedef struct LandscapeSetup
 
 typedef struct LandscapeData
 {
-	int			**map; // z values
-	t_Point2D	size; // matrix width(x) and height(y)
-	t_LandSetup	setup; // valus of moving/zooming/rotating
-	int			z_val_flip; // this will help to draw correctly when X or Y axis did 180 degree rotation, changing all z values to their negatives
+	int				**map; // z values
+	t_Point2D		size; // matrix width(x) and height(y)
+	t_LandSetup		setup; // valus of moving/zooming/rotating
+	t_LandStatus	status;
+	int				z_val_flip; // this will help to draw correctly when X or Y axis did 180 degree rotation, changing all z values to their negatives
 }	t_Landscape;
 
 /*

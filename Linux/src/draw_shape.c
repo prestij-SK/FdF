@@ -82,6 +82,62 @@ int draw_line_Bresenham(t_Image *img, t_Line2D *line)
     return (1);
 }
 
+int draw_line_Bresenham_random_colors(t_Image *img, t_Line2D *line)
+{
+    t_BresenhamUtils    util;
+    int                 pixel_color;
+
+    if (!img || !line)
+        return (ERROR_VALUE);
+    util.steep = is_steep(line->start, line->end); // Check if the line is steep
+    // Swap coordinates if the line is steep to simplify calculations
+    if (util.steep)
+    {
+        swap_int(&line->start.x, &line->start.y);
+        swap_int(&line->end.x, &line->end.y);
+    }
+    // Ensure that we always iterate from left to right
+    if (line->start.x > line->end.x)
+    {
+        swap_int(&line->start.x, &line->end.x);
+        swap_int(&line->start.y, &line->end.y);
+    }
+
+    util.delta.x = line->end.x - line->start.x; // we don't need to use abs() here as we ensured to start from bigger
+    util.delta.y = abs(line->end.y - line->start.y); // change in y
+    util.plot = 2 * util.delta.y - util.delta.x ; // Initial decision parameter
+    util.step.x = line->start.x < line->end.x ? 1 : -1; // Determine the direction in x
+    util.step.y = line->start.y < line->end.y ? 1 : -1; // Determine the direction in y
+    util.temp.x = line->start.x; // Initialize current x coordinate
+    util.temp.y = line->start.y; // Initialize current y coordinate
+
+    while (util.temp.x != line->end.x)
+    {
+        // Plot the point, taking into account whether the line is steep or not
+        if (util.steep && in_range(util.temp.y, util.temp.x, img->size.x, img->size.y))
+        {
+            pixel_color = get_gradient_color(line, util.temp.y);
+            alt_mlx_pixel_put(img, util.temp.y, util.temp.x, pixel_color);
+        }
+        else if (!util.steep && in_range(util.temp.x, util.temp.y, img->size.x, img->size.y))
+        {
+            pixel_color = get_gradient_color(line, util.temp.x);
+            alt_mlx_pixel_put(img, util.temp.x, util.temp.y, pixel_color);
+        }
+        else
+            return (0); // Quit the function if the coordinates are not in image's range
+        util.temp.x += util.step.x; // Move to the next x coordinate
+        // Update decision parameter and y coordinate if necessary
+        if (util.plot >= 0)
+        {
+            util.temp.y += util.step.y;
+            util.plot -= 2 * util.delta.x;
+        }
+        util.plot += 2 * util.delta.y; // Update decision parameter for the next point
+    }
+    return (1);
+}
+
 void    draw_landscape_horizontal_lines(t_Landscape *land_data, t_Image *land_table)
 {
     t_Line2D    line;
@@ -100,13 +156,19 @@ void    draw_landscape_horizontal_lines(t_Landscape *land_data, t_Image *land_ta
         {
             landscape_set_coord(land_data, &start, j, i);
             landscape_set_coord(land_data, &end, j + 1, i);
-            coord_set_z_value(land_data, &start, land_data->map[i][j]);
-            coord_set_z_value(land_data, &end, land_data->map[i][j + 1]);
+            if (land_data->status.is_isometric)
+            {
+                coord_set_z_value(land_data, &start, land_data->map[i][j]);
+                coord_set_z_value(land_data, &end, land_data->map[i][j + 1]);
+            }
             line.start = start;
             line.end = end;
             line.color_start = get_z_level_color(land_data->map[i][j]);
             line.color_end = get_z_level_color(land_data->map[i][j + 1]);
-            draw_line_Bresenham(land_table, &line);
+            if (land_data->status.is_party_time)
+                draw_line_Bresenham_random_colors(land_table, &line);
+            else
+                draw_line_Bresenham(land_table, &line);
             ++j;
         }
         ++i;
@@ -131,13 +193,19 @@ void    draw_landscape_vertical_lines(t_Landscape *land_data, t_Image *land_tabl
         {
             landscape_set_coord(land_data, &start, i, j);
             landscape_set_coord(land_data, &end, i, j + 1);
-            coord_set_z_value(land_data, &start, land_data->map[j][i]);
-            coord_set_z_value(land_data, &end, land_data->map[j + 1][i]);
+            if (land_data->status.is_isometric)
+            {
+                coord_set_z_value(land_data, &start, land_data->map[j][i]);
+                coord_set_z_value(land_data, &end, land_data->map[j + 1][i]);
+            }
             line.start = start;
             line.end = end;
             line.color_start = get_z_level_color(land_data->map[j][i]);
             line.color_end = get_z_level_color(land_data->map[j + 1][i]);
-            draw_line_Bresenham(land_table, &line);
+            if (land_data->status.is_party_time)
+                draw_line_Bresenham_random_colors(land_table, &line);
+            else
+                draw_line_Bresenham(land_table, &line);
             ++j;
         }
         ++i;
