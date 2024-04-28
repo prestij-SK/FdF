@@ -13,7 +13,7 @@
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
 
-// HOOK EVENT
+// HOOK EVENTS
 # define EVENT_KEYDOWN 2 // pressed
 # define EVENT_KEYUP 3 // released
 // # define EVENT_MOUSEDOWN 4 // not used
@@ -29,7 +29,7 @@
 # define KEY_UP_ARROW 65362
 # define KEY_DOWN_ARROW 65364
 # define KEY_X 120
-# define KEY_Y 121
+# define KEY_C 99
 # define KEY_Z 122
 # define KEY_A 97
 # define KEY_S 115
@@ -93,7 +93,7 @@ int	input_mouse_button(int button, int x, int y, t_FdF *fdf_data);
 */
 int		update_frame(t_FdF *fdf_data);
 void	update_X_key(t_FdF *fdf_data);
-void	update_Y_key(t_FdF *fdf_data);
+void	update_C_key(t_FdF *fdf_data);
 void	update_Z_key(t_FdF *fdf_data);
 void	update_A_key(t_FdF *fdf_data);
 void	update_S_key(t_FdF *fdf_data);

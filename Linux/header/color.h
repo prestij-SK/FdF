@@ -3,6 +3,13 @@
 
 # include "utils.h"
 
+// FDF IMAGE COLORS
+# define LAND_COLOR 0x222020
+# define OPTION_COLOR 0x3F3C5C
+# define BUTTONS_COLOR 0xB69D3A
+# define BUTTONS_COLOR_HOVER 0x81CA58
+# define STRING_COLOR 0x000000
+
 // LANDSCAPE LEVEL COLORS DEFAULT
 # define COLOR_LEVEL_LOW_7 0xA82E21
 # define COLOR_LEVEL_LOW_6 0x73351B
@@ -59,11 +66,14 @@ typedef struct Line2D_int
 /*
 	color.c functions
 
+	* get_z_level_color - every level of landscape will have a color, this function just chooses it by 'z_val'.
+	* set_rgb - set 'rgb_color' r,g,b fields to 'color' first, second and third 8 bits
+	* line_fraction - counting fraction for current pixel index on the line (interpolation)
+	* get_gradient_color - returns the color for the current pixel of the line
 */
-int		get_z_level_color(int val);
+int		get_z_level_color(int z_val);
 void	set_rgb(t_RGB *rgb_color, int color);
-double	fraction_count(double p1, double p2, double p_curr);
-// double	line_fraction(t_Line2D *line, int index);
+double	line_fraction(t_Line2D *line, int index);
 int		get_gradient_color(t_Line2D *line, int index);
 
 #endif

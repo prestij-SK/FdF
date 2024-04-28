@@ -1,5 +1,4 @@
 #include "../header/landscape.h"
-#include "../header/for_math.h"
 
 static void	landscape_gap_default(t_Landscape *land_data, int table_x, int table_y)
 {
@@ -53,7 +52,7 @@ static void landscape_other_setups(t_Landscape *land_data)
 		return ;
 	land_data->setup.move.x = 0;
 	land_data->setup.move.y = 0;
-	land_data->setup.zoom = 0;
+	land_data->setup.zoom = 1;
 	land_data->z_val_flip = 0;
 }
 
@@ -65,47 +64,4 @@ void	landscape_set_default(t_Landscape *land_data, int table_x, int table_y)
 	landscape_coords_default(land_data);
 	landscape_angles_default(land_data);
 	landscape_other_setups(land_data);
-	land_data->setup.color = COORD_LINE_COLOR;
-	land_data->setup.vertex_color = COORD_VERTEX_COLOR;
-}
-
-static void	coord_zoom(t_Landscape *land_data, t_Point2D *new_gap)
-{
-	if (!land_data || !new_gap)
-		return ;
-	new_gap->x = land_data->setup.gap.x + land_data->setup.zoom;
-	new_gap->y = land_data->setup.gap.y + land_data->setup.zoom;
-}
-
-static void	coord_move(t_Landscape *land_data, t_Point2D *coord)
-{
-	if (!land_data || !coord)
-		return ;
-	coord->x += land_data->setup.move.x;
-	coord->y += land_data->setup.move.y;
-}
-
-static void	coord_center(t_Landscape *land_data, t_Point2D *new_center)
-{
-	if (!land_data || !new_center)
-		return ;
-	new_center->x = land_data->setup.center.x + ((land_data->size.x / 2) * land_data->setup.zoom);
-	new_center->y = land_data->setup.center.y + ((land_data->size.y / 2) * land_data->setup.zoom);
-}
-
-void	landscape_set_coord(t_Landscape *land_data, t_Point2D *coord, int index_x, int index_y)
-{
-	t_Point2D	new_gap;
-	t_Point2D	new_center;
-
-	if (!land_data || !coord)
-		return ;
-	coord_zoom(land_data, &new_gap);
-	coord->x = (index_x * new_gap.x) + land_data->setup.start.x;
-	coord->y = (index_y * new_gap.y) + land_data->setup.start.y;
-	coord_center(land_data, &new_center);
-	rotate_Z(coord, land_data->setup.angles.z, new_center);
-	rotate_Y(coord, land_data->setup.angles.y, new_center);
-	rotate_X(coord, land_data->setup.angles.x, new_center);
-	coord_move(land_data, coord);
 }

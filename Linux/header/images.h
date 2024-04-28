@@ -2,35 +2,29 @@
 # define IMAGE_H
 
 # include "utils.h"
+# include "color.h"
 # include "../mlx_linux/mlx.h"
 
 // LAND TABLE
 # define LAND_X_POSITION 0
 # define LAND_Y_POSITION 0
 # define LAND_X_SIZE 1920
-# define LAND_Y_SIZE 730
-# define LAND_COLOR 0x00222121
+# define LAND_Y_SIZE 770
 
 // OPTION TABLE
 # define OPTION_X_POSITION 0
-# define OPTION_Y_POSITION 730
+# define OPTION_Y_POSITION 770
 # define OPTION_X_SIZE 1920
-# define OPTION_Y_SIZE 350
-# define OPTION_COLOR 0x00454262
+# define OPTION_Y_SIZE 310
 
 // BUTTONS TABLE
 # define BUTTONS_X_POSITION 75
-# define BUTTONS_Y_POSITION 750
-# define BUTTONS_X_SIZE 100
-# define BUTTONS_Y_SIZE 50
-# define BUTTONS_GAP 25
+# define BUTTONS_Y_POSITION 780
+# define BUTTONS_X_SIZE 95
+# define BUTTONS_Y_SIZE 45
+# define BUTTONS_GAP 15
 # define BUTTONS_TOTAL 12
-# define BUTTONS_COLOR 0x00B69D3A
-# define BUTTONS_COLOR_HOVER 0x00FF00
 # define BUTTONS_NOT_ACTIVE -1
-
-// STRING COLOR
-# define STRING_COLOR 0x000000
 
 typedef struct ImageData {
 	void		*img;

@@ -29,7 +29,7 @@ void    draw_rectangle_filled(t_Image *img)
     }
 }
 
-int draw_line_Bresenham(t_Image *img, t_Line2D *line, int z_val)
+int draw_line_Bresenham(t_Image *img, t_Line2D *line)
 {
     t_BresenhamUtils    util;
     int                 pixel_color;
@@ -58,29 +58,17 @@ int draw_line_Bresenham(t_Image *img, t_Line2D *line, int z_val)
     util.temp.x = line->start.x; // Initialize current x coordinate
     util.temp.y = line->start.y; // Initialize current y coordinate
 
-    // int color;
-    // if (z_val != 0)
-    //     color = LINE_COLOR;
-    // else
-    //     color = 0xFF0000;
-    // Iterate over each point along the line
-    int i = 0;
+    int i = 0; // n-th pixel counter along the line
     while (util.temp.x != line->end.x)
     {
         pixel_color = get_gradient_color(line, i);
         // Plot the point, taking into account whether the line is steep or not
         if (util.steep && in_range(util.temp.y, util.temp.x, img->size.x, img->size.y))
-        {
-            // pixel_color = get_gradient_color(line, util.temp.y, util.temp.x);
             alt_mlx_pixel_put(img, util.temp.y, util.temp.x, pixel_color);
-        }
         else if (!util.steep && in_range(util.temp.x, util.temp.y, img->size.x, img->size.y))
-        {
-            // pixel_color = get_gradient_color(line, util.temp.x, util.temp.y);
             alt_mlx_pixel_put(img, util.temp.x, util.temp.y, pixel_color);
-        }
         else
-            return (0); // this will quit the function if the coordinates are not in image's range
+            return (0); // Quit the function if the coordinates are not in image's range
         util.temp.x += util.step.x; // Move to the next x coordinate
         // Update decision parameter and y coordinate if necessary
         if (util.plot >= 0)
@@ -112,37 +100,13 @@ void    draw_landscape_horizontal_lines(t_Landscape *land_data, t_Image *land_ta
         {
             landscape_set_coord(land_data, &start, j, i);
             landscape_set_coord(land_data, &end, j + 1, i);
-            if (land_data->map[i][j] != 0)
-            {
-                if (land_data->z_val_flip)
-                {
-                    start.y += (land_data->map[i][j]) * COORD_Z_VALUE_MULTIPLIER;
-                }
-                else
-                {
-                    start.y -= (land_data->map[i][j]) * COORD_Z_VALUE_MULTIPLIER;
-                }
-            }
-            if (land_data->map[i][j + 1] != 0)
-            {
-                if (land_data->z_val_flip)
-                {
-                    end.y += (land_data->map[i][j + 1]) * COORD_Z_VALUE_MULTIPLIER;
-                }
-                else
-                {
-                    end.y -= (land_data->map[i][j + 1]) * COORD_Z_VALUE_MULTIPLIER;
-                }
-            }
+            coord_set_z_value(land_data, &start, land_data->map[i][j]);
+            coord_set_z_value(land_data, &end, land_data->map[i][j + 1]);
             line.start = start;
             line.end = end;
             line.color_start = get_z_level_color(land_data->map[i][j]);
             line.color_end = get_z_level_color(land_data->map[i][j + 1]);
-            if (land_data->map[i][j] != 0 || land_data->map[i][j + 1] != 0)
-                draw_line_Bresenham(land_table, &line, 1);
-            else
-                draw_line_Bresenham(land_table, &line, 0);
-                // break ; this would optimize, but it will draw wrong when you get to edge x < 0 or y < 0
+            draw_line_Bresenham(land_table, &line);
             ++j;
         }
         ++i;
@@ -167,37 +131,13 @@ void    draw_landscape_vertical_lines(t_Landscape *land_data, t_Image *land_tabl
         {
             landscape_set_coord(land_data, &start, i, j);
             landscape_set_coord(land_data, &end, i, j + 1);
-            if (land_data->map[j][i] != 0)
-            {
-                if (land_data->z_val_flip)
-                {
-                    start.y += (land_data->map[j][i]) * COORD_Z_VALUE_MULTIPLIER;
-                }
-                else
-                {
-                    start.y -= (land_data->map[j][i]) * COORD_Z_VALUE_MULTIPLIER;
-                }
-            }
-            if (land_data->map[j + 1][i] != 0)
-            {
-                if (land_data->z_val_flip)
-                {
-                    end.y += (land_data->map[j + 1][i]) * COORD_Z_VALUE_MULTIPLIER;
-                }
-                else
-                {
-                    end.y -= (land_data->map[j + 1][i]) * COORD_Z_VALUE_MULTIPLIER;
-                }
-            }
+            coord_set_z_value(land_data, &start, land_data->map[j][i]);
+            coord_set_z_value(land_data, &end, land_data->map[j + 1][i]);
             line.start = start;
             line.end = end;
             line.color_start = get_z_level_color(land_data->map[j][i]);
             line.color_end = get_z_level_color(land_data->map[j + 1][i]);
-            if (land_data->map[j][i] != 0 || land_data->map[j + 1][i] != 0)
-                draw_line_Bresenham(land_table, &line, 1);
-            else
-                draw_line_Bresenham(land_table, &line, 0);
-                // break ; this would optimize, but it will draw wrong when you get to edge x < 0 or y < 0
+            draw_line_Bresenham(land_table, &line);
             ++j;
         }
         ++i;

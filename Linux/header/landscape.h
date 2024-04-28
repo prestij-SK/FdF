@@ -3,6 +3,7 @@
 
 # include "utils.h"
 # include "file_control.h"
+# include "for_math.h"
 
 // COORDINATE DEFAULT OPTIONS
 # define COORD_X_START 100
@@ -13,15 +14,14 @@
 # define COORD_Y_GAP_MID 20
 # define COORD_X_GAP_BIG 40
 # define COORD_Y_GAP_BIG 40
-# define COORD_X_ANGLE 0
+# define COORD_X_ANGLE 30
 # define COORD_Y_ANGLE 0
-# define COORD_Z_ANGLE 0
+# define COORD_Z_ANGLE 45
 # define COORD_ROTATE_ANGLE 5
-# define COORD_PIXEL_MOVE_RANGE 7
-# define COORD_PIXEL_ZOOM_RANGE 3
+# define COORD_PIXEL_MOVE_RANGE 10
+# define COORD_PIXEL_ZOOM_RANGE 0.1
+# define COORD_PIXEL_ZOOM_LIMIT 0.2
 # define COORD_Z_VALUE_MULTIPLIER 4
-# define COORD_LINE_COLOR 0x00FF00
-# define COORD_VERTEX_COLOR 0xFF0000
 
 typedef struct LandscapeSetup
 {
@@ -31,9 +31,7 @@ typedef struct LandscapeSetup
 	t_Point2D	center;
 	t_Point2D	move;
 	t_Point3D	angles;
-	int			zoom;
-	int			color; // line colors
-	int			vertex_color; // line colors for z != 0
+	double		zoom;
 	// other stuff
 }	t_LandSetup;
 
@@ -62,10 +60,22 @@ int			assign_file_to_landscape(t_Landscape *land_data, t_FileData *file_data);
 	landscape_utils.c functions
 
 	* landscape_set_default - set/reset all 'land_data' fields to their initial default values
-	* landscape_set_coord - changes the 'coord', does all coordinate translate operations
 */
-// void	rotate_landscape(t_Landscape *land_data, int angle);
 void	landscape_set_default(t_Landscape *land_data, int table_x, int table_y);
+
+/*
+	coordinate_utils.c
+
+	* coord_operation - does the operation of the 'coord' by using 'land_data' setup values.
+	* coord_set_z_value - sets 'coord' y axis value by z_val. (these are the pointy mountain things)
+	* landscape_set_coord - adds/inflicts all 'land_data' setup options to 'coord'.
+*/
+void	coord_zoom(t_Landscape *land_data, t_Point2D *coord);
+void	coord_move(t_Landscape *land_data, t_Point2D *coord);
+void	coord_start(t_Landscape *land_data, t_Point2D *coord);
+void	coord_center(t_Landscape *land_data, t_Point2D *new_center);
+void	coord_set_z_value(t_Landscape *land_data, t_Point2D *coord, int z_val);
+void	coord_gap(t_Landscape *land_data, t_Point2D *coord, int index_x, int index_y);
 void	landscape_set_coord(t_Landscape *land_data, t_Point2D *coord, int index_x, int index_y);
 
 #endif

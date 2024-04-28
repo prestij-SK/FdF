@@ -3,6 +3,8 @@
 		"color.h": "c",
 		"utils.h": "c",
 		"file_control.h": "c",
-		"random": "c"
+		"random": "c",
+		"for_math.h": "c",
+		"landscape.h": "c"
 	}
 }

@@ -47,29 +47,18 @@ int	get_z_level_color(int z_val)
 	return (high_level_color(z_val));
 }
 
-double	fraction_count(double p1, double p2, double p_curr)
-{
-	if (p1 != p2)
-		return ((p_curr - p1) / (p2 - p1));
-	return (0.0);
-}
-
-static float	line_fraction(t_Line2D *line, int index)
+double	line_fraction(t_Line2D *line, int index)
 {
 	int		dx;
 	int		dy;
-	float	fraction;
+	double	fraction;
 
 	if (!line)
 		return (0.0);
 	dx = abs(line->start.x - line->end.x);
 	dy = abs(line->start.y - line->end.y);
 	int steps = dx > dy ? dx : dy;
-	// if (dx > dy)
-	// 	fraction = fraction_count(line->start.x, line->end.x, curr_x);
-	// else
-	// 	fraction = fraction_count(line->start.y, line->end.y, curr_y);
-	fraction = (float)index / steps;
+	fraction = (double)index / steps;
 	return (fraction);
 }
 
@@ -102,36 +91,3 @@ int	get_gradient_color(t_Line2D *line, int index)
 	new_color += rgb_start.b + (rgb_end.b - rgb_start.b) * fraction;
 	return (new_color);
 }
-
-// int get_gradient_color(t_Line2D *line, int index)
-// {
-//     t_RGB rgb_start;
-//     t_RGB rgb_end;
-//     t_RGB new_color;
-
-//     if (!line)
-//         return 0;
-
-//     set_rgb(&rgb_start, line->color_start);
-//     set_rgb(&rgb_end, line->color_end);
-
-//     float fraction = line_fraction(line, index);
-
-// 	new_color.r = rgb_start.r + (rgb_end.r - rgb_start.r) * fraction;
-// 	new_color.g = rgb_start.g + (rgb_end.g - rgb_start.g) * fraction;
-// 	new_color.b = rgb_start.b + (rgb_end.b - rgb_start.b) * fraction;
-
-//     // Interpolate each color component separately
-//     // int r = (int)(rgb_start.r + (rgb_end.r - rgb_start.r) * fraction);
-//     // int g = (int)(rgb_start.g + (rgb_end.g - rgb_start.g) * fraction);
-//     // int b = (int)(rgb_start.b + (rgb_end.b - rgb_start.b) * fraction);
-
-//     // Ensure color component values stay within [0, 255] range
-//     new_color.r = (new_color.r < 0) ? 0 : ((new_color.r > 255) ? 255 : new_color.r);
-//     new_color.g = (new_color.g < 0) ? 0 : ((new_color.g > 255) ? 255 : new_color.g);
-//     new_color.b = (new_color.b < 0) ? 0 : ((new_color.b > 255) ? 255 : new_color.b);
-
-//     // Pack the RGB components into a single integer
-
-//     return (new_color.r << 16) | (new_color.g << 8) | new_color.b;
-// }

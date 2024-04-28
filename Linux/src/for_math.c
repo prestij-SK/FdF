@@ -23,7 +23,6 @@ void	rotate_Z(t_Point2D *coord, int angle, t_Point2D center)
 void	rotate_Y(t_Point2D *coord, int angle, t_Point2D center)
 {
 	double	new_x;
-	double	new_y;
 	double	radian;
 
 	if (!coord)
@@ -35,7 +34,6 @@ void	rotate_Y(t_Point2D *coord, int angle, t_Point2D center)
 
 void	rotate_X(t_Point2D *coord, int angle, t_Point2D center)
 {
-	double	new_x;
 	double	new_y;
 	double	radian;
 

@@ -1,7 +1,7 @@
 NAME = fdf
 
 CC = cc
-CFLAGS = -I minilibx_macos
+CFLAGS = -Wall -Wextra -Werror -I minilibx_macos
 LDFLAGS = -Lminilibx_macos -lmlx -framework OpenGL -framework AppKit
 
 SRCS_DIR = src/
@@ -9,6 +9,7 @@ OBJS_DIR = obj/
 HEADERS_DIR = header/
 
 SRCS_NAME = color.c \
+			coordinate_utils.c \
 			draw_shape.c \
 			draw_utils.c \
 			error_handling.c \

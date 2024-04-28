@@ -7,9 +7,6 @@
 # include "images.h"
 # include "color.h"
 
-// LINE
-# define LINE_COLOR 0x00FF00
-
 // This is created just for Norminette
 typedef struct BresenhamUtils
 {
@@ -33,7 +30,7 @@ typedef struct BresenhamUtils
 void	draw_rectangle_filled(t_Image *img);
 void	alt_mlx_pixel_put(t_Image *img, int x, int y, int color);
 void    draw_landscape(t_Landscape *land_data, t_Image *land_table);
-int		draw_line_Bresenham(t_Image *img, t_Line2D *line, int z_val);
+int		draw_line_Bresenham(t_Image *img, t_Line2D *line);
 void    draw_landscape_vertical_lines(t_Landscape *land_data, t_Image *land_table);
 void    draw_landscape_horizontal_lines(t_Landscape *land_data, t_Image *land_table);
 
