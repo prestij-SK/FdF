@@ -21,7 +21,7 @@
 # define COORD_PIXEL_MOVE_RANGE 10
 # define COORD_PIXEL_ZOOM_RANGE 0.1
 # define COORD_PIXEL_ZOOM_LIMIT 0.2
-# define COORD_Z_VALUE_MULTIPLIER 4
+# define COORD_Z_VALUE_MULTIPLIER 10
 
 // STATUS CODES
 # define STATUS_IS_ACTIVE 1
@@ -31,7 +31,9 @@ typedef struct LandscapeStatus
 {
 	int	is_isometric;
 	int	is_conic;
-	int	is_party_time;
+	int	is_fiesta;
+	int	is_2D;
+	int	is_3D;
 }	t_LandStatus;
 
 typedef struct LandscapeSetup
@@ -86,8 +88,9 @@ void	coord_zoom(t_Landscape *land_data, t_Point2D *coord);
 void	coord_move(t_Landscape *land_data, t_Point2D *coord);
 void	coord_start(t_Landscape *land_data, t_Point2D *coord);
 void	coord_center(t_Landscape *land_data, t_Point2D *new_center);
-void	coord_set_z_value(t_Landscape *land_data, t_Point2D *coord, int z_val);
+void	coord_set_z_value_2D(t_Landscape *land_data, t_Point2D *coord, int z_val);
 void	coord_gap(t_Landscape *land_data, t_Point2D *coord, int index_x, int index_y);
-void	landscape_set_coord(t_Landscape *land_data, t_Point2D *coord, int index_x, int index_y);
+void	landscape_set_coord_2D(t_Landscape *land_data, t_Point2D *coord, int index_x, int index_y);
+void	landscape_set_coord_3D(t_Landscape *land_data, t_Point3D_d *coord, int index_x, int index_y);
 
 #endif

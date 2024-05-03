@@ -5,6 +5,8 @@
 		"file_control.h": "c",
 		"random": "c",
 		"for_math.h": "c",
-		"landscape.h": "c"
+		"landscape.h": "c",
+		"draw.h": "c",
+		"mlx.h": "c"
 	}
 }

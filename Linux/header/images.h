@@ -23,7 +23,7 @@
 # define BUTTONS_X_SIZE 95
 # define BUTTONS_Y_SIZE 45
 # define BUTTONS_GAP 15
-# define BUTTONS_TOTAL 18
+# define BUTTONS_TOTAL 20
 # define BUTTONS_NOT_ACTIVE -1
 
 typedef struct ImageData {

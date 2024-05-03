@@ -132,12 +132,12 @@ void	update_party_time(t_FdF *fdf_data)
 {
 	if (!fdf_data)
 		return ;
-	if (!fdf_data->land_data->status.is_party_time)
+	if (!fdf_data->land_data->status.is_fiesta)
 	{
-		fdf_data->land_data->status.is_party_time = STATUS_IS_ACTIVE;
+		fdf_data->land_data->status.is_fiesta = STATUS_IS_ACTIVE;
 		return ;
 	}
-	fdf_data->land_data->status.is_party_time = STATUS_IS_NOT_ACTIVE;
+	fdf_data->land_data->status.is_fiesta = STATUS_IS_NOT_ACTIVE;
 }
 
 // Show landscape in isometric projection
@@ -147,6 +147,9 @@ void	update_isometric(t_FdF *fdf_data)
 		return ;
 	fdf_data->land_data->status.is_isometric = STATUS_IS_ACTIVE;
 	fdf_data->land_data->status.is_conic = STATUS_IS_NOT_ACTIVE;
+	fdf_data->land_data->setup.angles.x = COORD_X_ANGLE;
+	fdf_data->land_data->setup.angles.y = COORD_Y_ANGLE;
+	fdf_data->land_data->setup.angles.z = COORD_Z_ANGLE;
 }
 
 // Show landscape int conic projection
@@ -159,6 +162,22 @@ void	update_conic(t_FdF *fdf_data)
 	fdf_data->land_data->setup.angles.x = 0;
 	fdf_data->land_data->setup.angles.y = 0;
 	fdf_data->land_data->setup.angles.z = 0;
+}
+
+void update_2D_Plane(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return ;
+	fdf_data->land_data->status.is_2D = STATUS_IS_ACTIVE;
+	fdf_data->land_data->status.is_3D = STATUS_IS_NOT_ACTIVE;
+}
+
+void update_3D_Plane(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return ;
+	fdf_data->land_data->status.is_3D = STATUS_IS_ACTIVE;
+	fdf_data->land_data->status.is_2D = STATUS_IS_NOT_ACTIVE;
 }
 
 // We don't need x and y, as fdf_data will have hover button's active index
@@ -203,6 +222,10 @@ void	update_mouse_left_click(t_FdF *fdf_data)
 		update_party_time(fdf_data);
 	else if (!ft_strncmp(temp_str, "Reset", 5))
 		landscape_set_default(fdf_data->land_data, fdf_data->land_table->size.x, fdf_data->land_table->size.y);
+	else if (!ft_strncmp(temp_str, "2D Plane", 8))
+		update_2D_Plane(fdf_data);
+	else if (!ft_strncmp(temp_str, "3D Plane", 8))
+		update_3D_Plane(fdf_data);
 	else if (!ft_strncmp(temp_str, "Exit", 4))
 		update_end_program(fdf_data);
 }

@@ -27,6 +27,27 @@ typedef struct Point3D_int
 	int	z;
 }	t_Point3D;
 
+typedef struct Point2D_double
+{
+	double	x;
+	double	y;
+}	t_Point2D_d;
+
+typedef struct Point3D_double
+{
+	double	x;
+	double	y;
+	double	z;
+}	t_Point3D_d;
+
+typedef struct Line2D_int
+{
+	t_Point2D	start;
+	t_Point2D	end;
+	int			color_start;
+	int			color_end;
+}	t_Line2D;
+
 /*
 	utils.c functions
 	

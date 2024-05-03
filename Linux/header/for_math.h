@@ -20,13 +20,17 @@
 	for_math.c functions
 
 	* get_radians - returns the angle in radians.
-	* rotate_X - set given 'coord' x,y to it's X rotation around the center by given angle.
-	* rotate_Y - set given 'coord' x,y to it's Y rotation around the center by given angle.
-	* rotate_Z - set given 'coord' x,y to it's Z rotation around the center by given angle.
+	* orthographic_projection - sets coordinate values to ortographic projection.
+	* rotate_XYZ_2D - set given 'coord' x,y to it's X,Y,Z rotation around the center by given angle in 2D plane.
+	* rotate_XYZ_3D - set given 'coord' x,y to it's X,Y,Z rotation around the center by given angle in 3D plane.
 */
 double	get_radians(int angle);
-void	rotate_X(t_Point2D *coord, int angle, t_Point2D center);
-void	rotate_Y(t_Point2D *coord, int angle, t_Point2D center);
-void	rotate_Z(t_Point2D *coord, int angle, t_Point2D center);
+void    orthographic_projection(t_Point3D_d *coord, int z_val);
+void	rotate_X_2D(t_Point2D *coord, int angle, t_Point2D center);
+void	rotate_Y_2D(t_Point2D *coord, int angle, t_Point2D center);
+void	rotate_Z_2D(t_Point2D *coord, int angle, t_Point2D center);
+void	rotate_X_3D(t_Point3D_d *coord, int angle, t_Point2D center, int z_val);
+void	rotate_Y_3D(t_Point3D_d *coord, int angle, t_Point2D center, int z_val);
+void	rotate_Z_3D(t_Point3D_d *coord, int angle, t_Point2D center, int z_val);
 
 #endif

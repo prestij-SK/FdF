@@ -62,7 +62,9 @@ static void	landscape_status_default(t_Landscape *land_data)
 		return ;
 	land_data->status.is_conic = STATUS_IS_NOT_ACTIVE;
 	land_data->status.is_isometric = STATUS_IS_ACTIVE;
-	land_data->status.is_party_time = STATUS_IS_NOT_ACTIVE;
+	land_data->status.is_fiesta = STATUS_IS_NOT_ACTIVE;
+	land_data->status.is_2D = STATUS_IS_NOT_ACTIVE;
+	land_data->status.is_3D = STATUS_IS_ACTIVE;
 }
 
 void	landscape_set_default(t_Landscape *land_data, int table_x, int table_y)

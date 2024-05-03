@@ -40,9 +40,18 @@ void    draw_landscape_horizontal_lines(t_Landscape *land_data, t_Image *land_ta
 	draw_utils.c functions
 
 	is_steep - is the line steep by checking delta_y > delta_x.
-	in_range - check if given coordinates are in range of width and height
+	in_range - check if given coordinates are in range of width and height.
+	setup_line_3D - initializes 'line' fields with given 'start' and 'end' coordinates for 3D plane.
 */
-int	is_steep(t_Point2D start, t_Point2D end);
-int	in_range(int x, int y, int width, int height);
+int		is_steep(t_Point2D start, t_Point2D end);
+int		in_range(int x, int y, int width, int height);
+void	setup_line_3D(t_Line2D *line, t_Point3D_d *start, t_Point3D_d *end);
+
+
+
+
+
+
+void    new_draw_land(t_Landscape *land_data, t_Image *land_table);
 
 #endif

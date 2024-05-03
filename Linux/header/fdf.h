@@ -49,7 +49,6 @@ typedef struct FdFData
 	t_Image			*option_table;
 	t_Image			**buttons;
 	int				active_button; // this will be used whenever mouse is on the button (-1 means something went wrong)
-	
 } 	t_FdF;
 
 /*

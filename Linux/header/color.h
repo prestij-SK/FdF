@@ -55,14 +55,6 @@ typedef struct RGB
 	int	b;
 }	t_RGB;
 
-typedef struct Line2D_int
-{
-	t_Point2D	start;
-	t_Point2D	end;
-	int			color_start;
-	int			color_end;
-}	t_Line2D;
-
 /*
 	color.c functions
 
