@@ -141,8 +141,10 @@ void	render_image(t_FdF *fdf_data, t_Image *img);
 /*
 	fdf_utils.c functions
 
+	* fdf_null_fields - set all 'fdf_data' fields to NULL.
 	* mouse_on_button - finds and returns the button index in which mouse cursor is pointing to.
 */
-int	mouse_on_button(t_FdF *fdf_data, int x, int y);
+void	fdf_null_fields(t_FdF *fdf_data);
+int		mouse_on_button(t_FdF *fdf_data, int x, int y);
 
 #endif

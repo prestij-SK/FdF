@@ -1,5 +1,17 @@
-#ifndef IMAGE_H
-# define IMAGE_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   images.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/04 15:28:12 by skedikia          #+#    #+#             */
+/*   Updated: 2024/05/04 15:29:22 by skedikia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef IMAGES_H
+# define IMAGES_H
 
 # include "utils.h"
 # include "color.h"
@@ -26,7 +38,8 @@
 # define BUTTONS_TOTAL 20
 # define BUTTONS_NOT_ACTIVE -1
 
-typedef struct ImageData {
+typedef struct ImageData
+{
 	void		*img;
 	char		*addr;
 	char		*name;
@@ -45,7 +58,8 @@ typedef struct ImageData {
 	* create_option_image - creates image for 'Option Table'.
 	* create_buttons_image - creates images for 'Buttons'.
 	* delete_iamge - deletes all 'img' fields.
-	* create_image - creates new 't_Image' type and returns it, NULL if creation failed.
+	* create_image - creates new 't_Image' type and returns it,
+	* 				 NULL if creation failed.
 	* delete_buttons_image - deletes all 'buttons' images
 */
 t_Image	*create_land_image(void *mlx);

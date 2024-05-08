@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"images.h": "c",
+		"draw.h": "c",
+		"for_math.h": "c",
+		"file_control.h": "c"
+	}
+}

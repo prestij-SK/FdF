@@ -1,16 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   landscape_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/08 17:10:55 by skedikia          #+#    #+#             */
+/*   Updated: 2024/05/08 17:11:15 by skedikia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/landscape.h"
 
-static void	landscape_gap_default(t_Landscape *land_data, int table_x, int table_y)
+static void	landscape_gap_default(t_Landscape *land_data,
+		int table_x, int table_y)
 {
 	if (!land_data)
 		return ;
-	if (land_data->size.x > table_x / 5 || land_data->size.y > table_y / 2)
+	if (land_data->size.x > table_x / 5
+		|| land_data->size.y > table_y / 2)
 	{
 		land_data->setup.gap.x = COORD_X_GAP_LOW;
 		land_data->setup.gap.y = COORD_Y_GAP_LOW;
 		return ;
 	}
-	else if (land_data->size.x > (table_x / 10) || land_data->size.y > (table_y / 4))
+	else if (land_data->size.x > (table_x / 10)
+		|| land_data->size.y > (table_y / 4))
 	{
 		land_data->setup.gap.x = COORD_X_GAP_MID;
 		land_data->setup.gap.y = COORD_Y_GAP_MID;
@@ -46,7 +61,7 @@ static void	landscape_angles_default(t_Landscape *land_data)
 	land_data->setup.angles.z = COORD_Z_ANGLE;
 }
 
-static void landscape_other_setups(t_Landscape *land_data)
+static void	landscape_other_setups(t_Landscape *land_data)
 {
 	if (!land_data)
 		return ;
@@ -54,17 +69,6 @@ static void landscape_other_setups(t_Landscape *land_data)
 	land_data->setup.move.y = 0;
 	land_data->setup.zoom = 1;
 	land_data->z_val_flip = 0;
-}
-
-static void	landscape_status_default(t_Landscape *land_data)
-{
-	if (!land_data)
-		return ;
-	land_data->status.is_conic = STATUS_IS_NOT_ACTIVE;
-	land_data->status.is_isometric = STATUS_IS_ACTIVE;
-	land_data->status.is_fiesta = STATUS_IS_NOT_ACTIVE;
-	land_data->status.is_2D = STATUS_IS_NOT_ACTIVE;
-	land_data->status.is_3D = STATUS_IS_ACTIVE;
 }
 
 void	landscape_set_default(t_Landscape *land_data, int table_x, int table_y)
@@ -75,5 +79,9 @@ void	landscape_set_default(t_Landscape *land_data, int table_x, int table_y)
 	landscape_coords_default(land_data);
 	landscape_angles_default(land_data);
 	landscape_other_setups(land_data);
-	landscape_status_default(land_data);
+	land_data->status.is_conic = STATUS_IS_NOT_ACTIVE;
+	land_data->status.is_isometric = STATUS_IS_ACTIVE;
+	land_data->status.is_fiesta = STATUS_IS_NOT_ACTIVE;
+	land_data->status.is_2d = STATUS_IS_NOT_ACTIVE;
+	land_data->status.is_3d = STATUS_IS_ACTIVE;
 }

@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/08 16:27:43 by skedikia          #+#    #+#             */
+/*   Updated: 2024/05/08 16:32:32 by skedikia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/get_next_line.h"
 
-// Reads from file and returns dynamically allocated string which contains/doesn't contain '\n'
 static char	*read_from_file(const int fd)
 {
 	char	*buffer;
@@ -13,11 +24,6 @@ static char	*read_from_file(const int fd)
 	{
 		buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		read_bytes = read(fd, buffer, BUFFER_SIZE);
-		if (read_bytes == -1)
-		{// drawing// drawing
-			free(final_text);
-			return (NULL);
-		}
 		buffer[read_bytes] = '\0';
 		if (read_bytes == 0 && !buffer[0])
 		{
@@ -32,7 +38,6 @@ static char	*read_from_file(const int fd)
 	return (final_text);
 }
 
-// Reads from string and returns dynamically allocated string which contains/doesn't contain '\n'
 static char	*take_next_line(const char *scanned_text)
 {
 	char	*next_line;
@@ -55,9 +60,7 @@ static char	*take_next_line(const char *scanned_text)
 	return (next_line);
 }
 
-// Remove from string first line that contains/doesn't contain '\n'.
-// Returns dynamically allocated string after removing.
-static char *cut_next_line(char *scanned_text)
+static char	*cut_next_line(char *scanned_text)
 {
 	char	*new_text;
 	char	*temp;
@@ -67,7 +70,8 @@ static char *cut_next_line(char *scanned_text)
 		return (NULL);
 	i = strlen_alt(scanned_text, '\n');
 	temp = scanned_text;
-	new_text = (char *)malloc(sizeof(char) * (strlen_alt(scanned_text, '\0') - i + 1));
+	new_text = (char *)malloc(sizeof(char)
+			* (strlen_alt(scanned_text, '\0') - i + 1));
 	if (!new_text)
 		return (NULL);
 	scanned_text += i;
@@ -83,8 +87,6 @@ static char *cut_next_line(char *scanned_text)
 	return (new_text);
 }
 
-// Returns first line/string from file, which ends with '\n'.
-// Returns string without '\n' if it is the end of the file.
 char	*get_next_line(int fd)
 {
 	static char	*scanned_text;

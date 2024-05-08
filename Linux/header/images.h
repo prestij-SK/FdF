@@ -1,5 +1,5 @@
-#ifndef IMAGE_H
-# define IMAGE_H
+#ifndef IMAGES_H
+# define IMAGES_H
 
 # include "utils.h"
 # include "color.h"
@@ -26,7 +26,8 @@
 # define BUTTONS_TOTAL 20
 # define BUTTONS_NOT_ACTIVE -1
 
-typedef struct ImageData {
+typedef struct ImageData
+{
 	void		*img;
 	char		*addr;
 	char		*name;

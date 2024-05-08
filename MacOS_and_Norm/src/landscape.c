@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   landscape.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/08 17:08:53 by skedikia          #+#    #+#             */
+/*   Updated: 2024/05/08 17:09:02 by skedikia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/landscape.h"
 
 void	delete_landscape_data(t_Landscape *land_data)
@@ -88,6 +100,7 @@ t_Landscape	*create_landscape_data(t_FileData *file_data)
 		return (NULL);
 	if (!assign_file_to_landscape(new_land_data, file_data))
 	{
+		usage_file_values();
 		delete_landscape_data(new_land_data);
 		return (NULL);
 	}

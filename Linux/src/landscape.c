@@ -88,6 +88,7 @@ t_Landscape	*create_landscape_data(t_FileData *file_data)
 		return (NULL);
 	if (!assign_file_to_landscape(new_land_data, file_data))
 	{
+		usage_file_values();
 		delete_landscape_data(new_land_data);
 		return (NULL);
 	}

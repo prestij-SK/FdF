@@ -23,3 +23,15 @@ int	mouse_on_button(t_FdF *fdf_data, int x, int y)
 	}
 	return (BUTTONS_NOT_ACTIVE);
 }
+
+void	fdf_null_fields(t_FdF *fdf_data)
+{
+	if (!fdf_data)
+		return ;
+	fdf_data->mlx = NULL;
+	fdf_data->mlx_window = NULL;
+	fdf_data->land_table = NULL;
+	fdf_data->option_table = NULL;
+	fdf_data->buttons = NULL;
+	fdf_data->land_data = NULL;
+}

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/08 17:38:58 by skedikia          #+#    #+#             */
+/*   Updated: 2024/05/08 17:39:25 by skedikia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/utils.h"
 
 void	print_message(char *str)
@@ -45,7 +57,9 @@ char	*remove_last_enter(char *line)
 
 void	swap_int(int *a, int *b)
 {
-    int temp = *a;
-    *a = *b;
-    *b = temp;
+	int	temp;
+
+	temp = *a;
+	*a = *b;
+	*b = temp;
 }

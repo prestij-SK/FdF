@@ -1,37 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   file_control.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/08 14:48:35 by skedikia          #+#    #+#             */
+/*   Updated: 2024/05/08 14:49:52 by skedikia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/file_control.h"
-
-void	delete_file_data(t_FileData *file_data)
-{
-	int	i;
-
-	if (!file_data)
-		return ;
-	i = 0;
-	if (file_data->file_content)
-	{
-		while (i < file_data->row_iter)
-		{
-			ft_free_split(file_data->file_content[i]);
-			file_data->file_content[i] = NULL;
-			++i;
-		}
-	}
-	free(file_data->file_content);
-	file_data->file_content = NULL;
-	file_data->row = ERROR_VALUE;
-	file_data->column = ERROR_VALUE;
-	if (close(file_data->descriptor) == ERROR_VALUE)
-		exit_with_error("File Closing Error!\n");
-	file_data->descriptor = ERROR_VALUE;
-}
 
 static void	set_row_and_column(t_FileData *file_data, char *file_name)
 {
 	char	*line;
 	int		descriptor;
 
-	if (!file_data)
-		return ;
 	descriptor = open(file_name, O_RDONLY);
 	if (descriptor == ERROR_VALUE)
 		exit_with_error("File Openning Error!\n");
@@ -54,21 +39,6 @@ static void	set_row_and_column(t_FileData *file_data, char *file_name)
 	file_data->column = 0;
 	if (close(descriptor) == ERROR_VALUE)
 		exit_with_error("File Closing Error!\n");
-}
-
-static void	set_descriptor(t_FileData *file_data, char *file_name)
-{
-	if (!file_data)
-		return ;
-	file_data->descriptor = open(file_name, O_RDONLY);
-}
-
-static void	set_content_alloc(t_FileData *file_data)
-{
-	if (!file_data)
-		return ;
-	file_data->file_content = (char ***)malloc(sizeof(char **) * file_data->row);
-	file_data->row_iter = 0;
 }
 
 static int	split_and_add_line(t_FileData *file_data, char *line)
@@ -119,7 +89,7 @@ static int	parse_content(t_FileData *file_data)
 		{
 			get_next_line(ERROR_VALUE);
 			free(line);
-			return (0);	
+			return (0);
 		}
 		free(line);
 		line = get_next_line(file_data->descriptor);

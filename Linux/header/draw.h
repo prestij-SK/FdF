@@ -47,11 +47,4 @@ int		is_steep(t_Point2D start, t_Point2D end);
 int		in_range(int x, int y, int width, int height);
 void	setup_line_3D(t_Line2D *line, t_Point3D_d *start, t_Point3D_d *end);
 
-
-
-
-
-
-void    new_draw_land(t_Landscape *land_data, t_Image *land_table);
-
 #endif

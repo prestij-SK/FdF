@@ -1,4 +1,4 @@
-# include "../header/for_math.h"
+#include "../header/for_math.h"
 
 double	get_radians(int angle)
 {

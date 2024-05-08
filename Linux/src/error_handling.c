@@ -16,7 +16,7 @@ void	usage_arguments()
 void	usage_file_content()
 {
 	print_message("Wrong File Content!\n");
-	print_message("File must contain rectangular matrix, without any additional spaces.\n");
+	print_message("File must contain rectangular matrix of integers, without any additional spaces.\n");
 	exit(EXIT_FAILURE);
 }
 
@@ -24,7 +24,6 @@ void	usage_file_values()
 {
 	print_message("Wrong File Values!\n");
 	print_message("File must contain only integers that fits to size of 'int'.\n");
-	exit(EXIT_FAILURE);
 }
 
 void	fdf_init_error()

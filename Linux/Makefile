@@ -1,7 +1,7 @@
 NAME = fdf
 
 CC = cc
-CFLAGS = -I minilibx_macos
+CFLAGS = -Wall -Wextra -Werror -I minilibx_macos
 LDFLAGS = -Lminilibx_macos -lmlx -framework OpenGL -framework AppKit
 
 SRCS_DIR = src/

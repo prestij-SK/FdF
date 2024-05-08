@@ -35,10 +35,6 @@ int	fdf_data_init(t_FdF *fdf_data, t_FileData *file_data)
 	fdf_data->mlx_window = mlx_new_window(fdf_data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "dasist ABUBA");
 	if (!fdf_data->mlx_window)
 		return (0);
-	fdf_data->land_data = create_landscape_data(file_data);
-	landscape_set_default(fdf_data->land_data, LAND_X_SIZE, LAND_Y_SIZE);
-	if (!fdf_data->land_data)
-		return (0);
 	fdf_data->land_table = create_land_image(fdf_data->mlx);
 	if (!fdf_data->land_table)
 		return (0);
@@ -47,6 +43,10 @@ int	fdf_data_init(t_FdF *fdf_data, t_FileData *file_data)
 		return (0);
 	fdf_data->buttons = create_buttons_image(fdf_data->mlx);
 	if (!fdf_data->buttons)
+		return (0);
+	fdf_data->land_data = create_landscape_data(file_data);
+	landscape_set_default(fdf_data->land_data, LAND_X_SIZE, LAND_Y_SIZE);
+	if (!fdf_data->land_data)
 		return (0);
 	fdf_data->active_button = BUTTONS_NOT_ACTIVE;
 	return (1);

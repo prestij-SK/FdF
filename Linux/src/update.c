@@ -183,7 +183,7 @@ void update_3D_Plane(t_FdF *fdf_data)
 // We don't need x and y, as fdf_data will have hover button's active index
 void	update_mouse_left_click(t_FdF *fdf_data)
 {
-	char*	temp_str;
+	char	*temp_str;
 
 	if (!fdf_data)
 		return ;
