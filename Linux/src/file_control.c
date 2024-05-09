@@ -63,12 +63,15 @@ static void	set_descriptor(t_FileData *file_data, char *file_name)
 	file_data->descriptor = open(file_name, O_RDONLY);
 }
 
-static void	set_content_alloc(t_FileData *file_data)
+static int	set_content_alloc(t_FileData *file_data)
 {
 	if (!file_data)
-		return ;
-	file_data->file_content = (char ***)malloc(sizeof(char **) * file_data->row);
+		return (0);
+	file_data->file_content = (char ***)malloc(sizeof(char **) * (file_data->row + 1));
+	if (!file_data->file_content)
+		return (0);
 	file_data->row_iter = 0;
+	file_data->file_content[file_data->row] = NULL;
 }
 
 static int	split_and_add_line(t_FileData *file_data, char *line)
@@ -92,7 +95,10 @@ static int	split_and_add_line(t_FileData *file_data, char *line)
 	else if (file_data->column == 0)
 		file_data->column = size;
 	else if (file_data->column != size)
+	{
+		ft_free_split(new_split);
 		return (0);
+	}
 	file_data->file_content[file_data->row_iter] = new_split;
 	++(file_data->row_iter);
 	return (1);

@@ -7,6 +7,7 @@
 		"for_math.h": "c",
 		"landscape.h": "c",
 		"draw.h": "c",
-		"mlx.h": "c"
+		"mlx.h": "c",
+		"fdf.h": "c"
 	}
 }
