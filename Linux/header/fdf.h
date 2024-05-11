@@ -56,11 +56,13 @@ typedef struct FdFData
 
 	* fdf_start - makes all preparations and starts the program.
 	* start_program - starting the main logic of FdF, returns true on success, else false.
+	* fdf_mlx_delete - this will delete all fields that were created for minilibx library.
 	* delete_fdf_data - deletes all feilds of 'fdf_data'.
 	* fdf_data_init - initializing all 'fdf_data' fields, returns true on success, else false.
 */
 void	fdf_start(char *file_name);
 int		start_program(t_FdF *fdf_data);
+void	fdf_mlx_delete(t_FdF *fdf_data);
 void	delete_fdf_data(t_FdF *fdf_data);
 int		fdf_data_init(t_FdF *fdf_data, t_FileData *file_data);
 

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   landscape.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/08 17:08:53 by skedikia          #+#    #+#             */
-/*   Updated: 2024/05/08 17:09:02 by skedikia         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../header/landscape.h"
 
 void	delete_landscape_data(t_Landscape *land_data)
@@ -57,6 +45,8 @@ int	landscape_init(t_Landscape *land_data, t_FileData *file_data)
 		}
 		++i;
 	}
+	land_data->size.x = file_data->column;
+	land_data->size.y = file_data->row;
 	return (1);
 }
 
@@ -102,9 +92,8 @@ t_Landscape	*create_landscape_data(t_FileData *file_data)
 	{
 		usage_file_values();
 		delete_landscape_data(new_land_data);
+		free(new_land_data);
 		return (NULL);
 	}
-	new_land_data->size.x = file_data->column;
-	new_land_data->size.y = file_data->row;
 	return (new_land_data);
 }

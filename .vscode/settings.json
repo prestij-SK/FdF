@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"fdf.h": "c",
-		"for_math.h": "c"
+		"for_math.h": "c",
+		"file_control.h": "c"
 	}
 }

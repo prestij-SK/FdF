@@ -88,7 +88,7 @@ typedef struct FdFData
 */
 void	fdf_start(char *file_name);
 int		start_program(t_FdF *fdf_data);
-void	delete_fdf_data(t_FdF *fdf_data);
+void	fdf_mlx_delete(t_FdF *fdf_data);
 int		fdf_data_init(t_FdF *fdf_data, t_FileData *file_data);
 
 /*
@@ -163,6 +163,7 @@ void	update_buttons_hover(t_FdF *fdf_data, int x, int y);
 */
 int		can_zoom_out(t_Landscape *land_data);
 void	rotation_flip(t_Landscape *land_data);
+void	delete_fdf_data(t_FdF *fdf_data);
 
 /*
 	render.c functions

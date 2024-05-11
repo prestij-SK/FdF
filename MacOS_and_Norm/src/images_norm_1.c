@@ -51,7 +51,7 @@ static void	set_button_fields(t_Image *button, int x, int y)
 
 static void	del_buttons_norm(t_Image **buttons, void *mlx, int i)
 {
-	if (!buttons)
+	if (!buttons || !mlx)
 		return ;
 	while (i >= 0)
 	{

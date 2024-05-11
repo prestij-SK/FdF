@@ -16,27 +16,19 @@ void	delete_fdf_data(t_FdF *fdf_data)
 {
 	if (!fdf_data)
 		return ;
-	delete_buttons_image(fdf_data->buttons, fdf_data->mlx);
-	free(fdf_data->buttons);
-	delete_image(fdf_data->land_table, fdf_data->mlx);
-	free(fdf_data->land_table);
-	delete_image(fdf_data->option_table, fdf_data->mlx);
-	free(fdf_data->option_table);
 	delete_landscape_data(fdf_data->land_data);
 	free(fdf_data->land_data);
-	mlx_destroy_window(fdf_data->mlx, fdf_data->mlx_window);
-	fdf_data->mlx = NULL;
-	fdf_data->mlx_window = NULL;
-	fdf_data->land_data = NULL;
-	fdf_data->land_table = NULL;
-	fdf_data->option_table = NULL;
-	fdf_data->buttons = NULL;
-	fdf_data->active_button = ERROR_VALUE;
+	fdf_mlx_delete(fdf_data);
+	fdf_null_fields(fdf_data);
 }
 
 int	fdf_data_init(t_FdF *fdf_data, t_FileData *file_data)
 {
 	if (!fdf_data || !file_data)
+		return (0);
+	fdf_data->land_data = create_landscape_data(file_data);
+	landscape_set_default(fdf_data->land_data, LAND_X_SIZE, LAND_Y_SIZE);
+	if (!fdf_data->land_data)
 		return (0);
 	fdf_data->mlx = mlx_init();
 	if (!fdf_data->mlx)
@@ -55,10 +47,6 @@ int	fdf_data_init(t_FdF *fdf_data, t_FileData *file_data)
 	if (!fdf_data->buttons)
 		return (0);
 	fdf_data->active_button = BUTTONS_NOT_ACTIVE;
-	fdf_data->land_data = create_landscape_data(file_data);
-	landscape_set_default(fdf_data->land_data, LAND_X_SIZE, LAND_Y_SIZE);
-	if (!fdf_data->land_data)
-		return (0);
 	return (1);
 }
 

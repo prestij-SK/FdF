@@ -4,18 +4,9 @@ void	delete_fdf_data(t_FdF *fdf_data)
 {
 	if (!fdf_data)
 		return ;
-	delete_buttons_image(fdf_data->buttons, fdf_data->mlx);
-	free(fdf_data->buttons);
-	delete_image(fdf_data->land_table, fdf_data->mlx);
-	free(fdf_data->land_table);
-	delete_image(fdf_data->option_table, fdf_data->mlx);
-	free(fdf_data->option_table);
+	
 	delete_landscape_data(fdf_data->land_data);
 	free(fdf_data->land_data);
-	mlx_destroy_window(fdf_data->mlx, fdf_data->mlx_window);
-	// free(fdf_data->mlx_window); // this will double free actually
-	mlx_destroy_display(fdf_data->mlx);
-	free(fdf_data->mlx);
 	fdf_data->mlx = NULL;
 	fdf_data->mlx_window = NULL;
 	fdf_data->land_data = NULL;

@@ -35,6 +35,6 @@ typedef struct FileData
 void	delete_file_data(t_FileData *file_data);
 int		file_data_init(t_FileData *file_data, char *file_name);
 void	set_descriptor(t_FileData *file_data, char *file_name);
-void	set_content_alloc(t_FileData *file_data);
+int		set_content_alloc(t_FileData *file_data);
 
 #endif

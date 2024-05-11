@@ -25,10 +25,9 @@ void	usage_arguments(void)
 	exit(EXIT_FAILURE);
 }
 
-void	usage_file_content(void)
+void	usage_file_values(void)
 {
-	print_message("Wrong File Content!\n");
-	print_message("File must contain rectangular matrix of integers,");
-	print_message(" without any additional spaces.\n");
-	exit(EXIT_FAILURE);
+	print_message("Wrong File Values!\n");
+	print_message("File must contain only integers");
+	print_message(" that fits to size of 'int'.\n");
 }

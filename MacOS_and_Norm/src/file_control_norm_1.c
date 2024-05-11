@@ -44,11 +44,14 @@ void	set_descriptor(t_FileData *file_data, char *file_name)
 	file_data->descriptor = open(file_name, O_RDONLY);
 }
 
-void	set_content_alloc(t_FileData *file_data)
+int	set_content_alloc(t_FileData *file_data)
 {
 	if (!file_data)
-		return ;
-	file_data->file_content = (char ***)malloc(sizeof(char **)
-			* file_data->row);
+		return (0);
+	file_data->file_content = (char ***)malloc(sizeof(char **) * (file_data->row + 1));
+	if (!file_data->file_content)
+		return (0);
 	file_data->row_iter = 0;
+	file_data->file_content[file_data->row] = NULL;
+	return (1);
 }

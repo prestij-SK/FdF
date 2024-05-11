@@ -15,7 +15,7 @@
 void	update_end_program(t_FdF *fdf_data)
 {
 	delete_fdf_data(fdf_data);
-	delete_landscape_data(fdf_data->land_data);
+	// delete_landscape_data(fdf_data->land_data);
 	program_end();
 }
 

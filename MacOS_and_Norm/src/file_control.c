@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   file_control.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: skedikia <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/08 14:48:35 by skedikia          #+#    #+#             */
-/*   Updated: 2024/05/08 14:49:52 by skedikia         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../header/file_control.h"
 
 static void	set_row_and_column(t_FileData *file_data, char *file_name)
@@ -17,6 +5,8 @@ static void	set_row_and_column(t_FileData *file_data, char *file_name)
 	char	*line;
 	int		descriptor;
 
+	if (!file_data)
+		return ;
 	descriptor = open(file_name, O_RDONLY);
 	if (descriptor == ERROR_VALUE)
 		exit_with_error("File Openning Error!\n");
@@ -62,9 +52,11 @@ static int	split_and_add_line(t_FileData *file_data, char *line)
 	else if (file_data->column == 0)
 		file_data->column = size;
 	else if (file_data->column != size)
+	{
+		ft_free_split(new_split);
 		return (0);
+	}
 	file_data->file_content[file_data->row_iter] = new_split;
-	++(file_data->row_iter);
 	return (1);
 }
 
@@ -89,9 +81,10 @@ static int	parse_content(t_FileData *file_data)
 		{
 			get_next_line(ERROR_VALUE);
 			free(line);
-			return (0);
+			return (0);	
 		}
 		free(line);
+		++(file_data->row_iter);
 		line = get_next_line(file_data->descriptor);
 	}
 	return (1);

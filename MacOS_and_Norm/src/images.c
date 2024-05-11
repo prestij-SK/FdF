@@ -48,6 +48,8 @@ t_Image	*create_option_image(void *mlx)
 {
 	t_Image	*new_image;
 
+	if (!mlx)
+		return (NULL);
 	new_image = create_image(mlx, OPTION_X_SIZE, OPTION_Y_SIZE);
 	if (!new_image)
 		return (NULL);
@@ -64,6 +66,8 @@ t_Image	*create_land_image(void *mlx)
 {
 	t_Image	*new_image;
 
+	if (!mlx)
+		return (NULL);
 	new_image = create_image(mlx, LAND_X_SIZE, LAND_Y_SIZE);
 	if (!new_image)
 		return (NULL);
@@ -80,7 +84,7 @@ void	delete_buttons_image(t_Image **buttons, void *mlx)
 {
 	int	i;
 
-	if (!buttons)
+	if (!buttons || !mlx)
 		return ;
 	i = 0;
 	while (i < BUTTONS_TOTAL)
